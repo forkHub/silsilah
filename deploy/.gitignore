@@ -1,2 +1,4 @@
 module
 /App.js
+node_modules
+app.js
