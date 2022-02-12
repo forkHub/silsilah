@@ -24,6 +24,16 @@ class Api {
 				util.respError(resp, e);
 			}
 		});
+
+		this.router.get("/api/contact", (req: express.Request, resp: express.Response) => {
+			try {
+				req;
+				resp.status(200).send("ok");
+			}
+			catch (e) {
+				util.respError(resp, e);
+			}
+		});
 	}
 }
 
