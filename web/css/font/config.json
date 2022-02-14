@@ -41,6 +41,36 @@
       "css": "picture",
       "code": 59394,
       "src": "websymbols"
+    },
+    {
+      "uid": "9dd9e835aebe1060ba7190ad2b2ed951",
+      "css": "search",
+      "code": 59395,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "1e394b6cd5e0da3e10d8e4f3fe355960",
+      "css": "adult",
+      "code": 59396,
+      "src": "elusive"
+    },
+    {
+      "uid": "9f7e588c66cfd6891f6f507cf6f6596b",
+      "css": "phone",
+      "code": 59397,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "bf882b30900da12fca090d9796bc3030",
+      "css": "mail",
+      "code": 59398,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "51fb22f9ff9d7f60c95ef31e4c59502d",
+      "css": "comment",
+      "code": 62636,
+      "src": "mfglabs"
     }
   ]
 }
