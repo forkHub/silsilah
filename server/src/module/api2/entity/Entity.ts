@@ -1,4 +1,4 @@
-import { AnakEnt } from "./Anak";
+import { AnakEnt } from "./AnakEnt";
 
 class Entity {
     private _anak: AnakEnt = new AnakEnt();
