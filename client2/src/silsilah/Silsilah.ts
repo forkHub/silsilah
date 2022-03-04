@@ -1,8 +1,3 @@
-import { BaseComponent } from "../comp/BaseComponent.js";
-import { Util } from "../comp/Util.js";
-import { AnggotaDao } from "./AnggotaDao.js"
-import { RouterKOns } from "./RouterKons.js";
-
 declare var data: ISlAnggota;
 
 class App {
@@ -261,7 +256,7 @@ class AnggotaView extends BaseComponent {
 
 }
 
-export class Hubung extends BaseComponent {
+class Hubung extends BaseComponent {
 	constructor() {
 		super();
 		this._template = `
@@ -288,17 +283,17 @@ export class Hubung extends BaseComponent {
 }
 
 
-var app: App = new App();
+// var app: App = new App();
 
-window.onload = () => {
-	let w: any = window;
-	w.app = app;
+// window.onload = () => {
+// 	let w: any = window;
+// 	w.app = app;
 
-	app.renderAnggota(data, document.body.querySelector('div.silsilah-cont') as HTMLDivElement, -1, true);
+// 	app.renderAnggota(data, document.body.querySelector('div.silsilah-cont') as HTMLDivElement, -1, true);
 
-	window.document.body.onclick = () => {
-		console.log('window on click')
-	}
-}
+// 	window.document.body.onclick = () => {
+// 		console.log('window on click')
+// 	}
+// }
 
 
