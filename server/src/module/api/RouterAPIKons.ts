@@ -5,19 +5,10 @@ export class RouterAPIKOns {
 	static readonly api_auth_logout: string = "/api/auth/logout";
 
 	static readonly api_anggota_daftar: string = "/api/anggota/daftar";
-	static readonly api_anggota_edit: string = "/api/anggota/edit";
-	static readonly api_anggota_hapus: string = "/api/anggota/hapus";
-	static readonly api_anggota_update: string = "/api/anggota/update";
-
-
-
-	//TODO: gak dipakai, sudah masuk parameter dari daftar
 	static readonly api_anggota_daftar_kunci_hal: string = "/api/anggota/daftar/kunci/:kunci/hal/:hal";
 
-	//TODO: beranda gak dipakai
 	static readonly api_beranda_lihat_id: string = "/sm/beranda/lihat/:id";
 	static readonly api_beranda_id: string = "/sm/beranda/:id";
-
 	static readonly api_anggota_id_info_edit: string = "/sm/anggota/:id/info/edit";
 	static readonly api_anggota_id_edit_beranda: string = "/sm/anggota/:id/edit/beranda";
 

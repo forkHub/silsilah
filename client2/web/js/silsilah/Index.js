@@ -1,9 +1,7 @@
+"use strict";
 class Index {
-
 }
-
-var index: Index;
-
+var index;
 window.onload = () => {
     index = new Index();
-}
+};
