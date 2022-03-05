@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EditBeranda = void 0;
 const Param_1 = require("../../Param");
 const Util_1 = require("../../Util");
 const Config_1 = require("../Config");
@@ -197,7 +196,7 @@ class EditBeranda {
 					<button
 						class="btn btn-primary col-12 col-sm-6"
 						${Param_1.Param.HA_KLIK} 
-						${Param_1.Param.HA_GET}="${Util_1.util.getUrl(RouterKons_1.RouterKOns.g_anggota_id_pas_tambah, [anggota.id])}"> 
+						${Param_1.Param.HA_GET}="${Util_1.util.getUrl(RouterKons_1.RouterKOns.g_anggota_id_calon_pas_cari, [anggota.id])}"> 
 							tambah pasangan
 					</button>`;
         }

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.configDB = void 0;
 exports.configDB = {
     host: 'localhost',
     user: 'root',

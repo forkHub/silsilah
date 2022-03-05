@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Kerabat = void 0;
 const SilsilahModule_1 = require("../SilsilahModule");
 class Kerabat {
     async muat(anggota) {
@@ -73,7 +72,7 @@ class Kerabat {
             let rel = await this.muatRel(anggota.rel_id);
             if (!rel)
                 return;
-            let anakAr = await SilsilahModule_1.sm.dao.anggota.daftarAnak(rel.id);
+            let anakAr = await SilsilahModule_1.sm.dao.anak.daftarAnak(rel.id);
             anakAr.forEach((item) => {
                 daftar.push(item);
             });
@@ -86,7 +85,7 @@ class Kerabat {
         try {
             if (anggota.ortu_id <= 0)
                 return;
-            let anak = await SilsilahModule_1.sm.dao.anggota.daftarAnak(anggota.ortu_id);
+            let anak = await SilsilahModule_1.sm.dao.anak.daftarAnak(anggota.ortu_id);
             anak.forEach((item) => {
                 if (item.nama_lengkap != anggota.nama_lengkap) {
                     daftar.push(item);
@@ -137,7 +136,7 @@ class Kerabat {
             let relOrtu = await this.muatRel(anggota.ortu_id);
             if (!relOrtu)
                 return;
-            let ortu = await SilsilahModule_1.sm.dao.anggota.lihatOrtu(relOrtu.id);
+            let ortu = await SilsilahModule_1.sm.dao.ortu.lihatOrtu(relOrtu.id);
             if (!ortu)
                 return;
             if (ortu.length == 0)

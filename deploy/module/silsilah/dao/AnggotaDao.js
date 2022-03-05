@@ -1,16 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AnggotaDao = void 0;
 const Sql_1 = require("../../Sql");
 const Config_1 = require("../Config");
 //TODO: [ref] nama query lebih semantik
 class AnggotaDao {
-    select_profile = ` id, nama, nama_lengkap, alamat, jkl, tgl_lahir, tgl_meninggal, wa, fb, instagram, thumb, foto, rel_id, ortu_id`;
-    select_nama = ' id, nama, nama_lengkap ';
-    where_jkl = ' WHERE jkl = ? ';
-    where_cari = ' WHERE (nama LIKE ? OR nama_lengkap LIKE ?) ';
-    where_semua = ' WHERE 1 ';
-    order_nama = ' ORDER BY nama ';
+    constructor() {
+        this.select_profile = ` id, nama, nama_lengkap, alamat, jkl, tgl_lahir, tgl_meninggal, wa, fb, instagram, thumb, foto, rel_id, ortu_id`;
+        this.select_nama = ' id, nama, nama_lengkap ';
+        this.where_jkl = ' WHERE jkl = ? ';
+        this.where_cari = ' WHERE (nama LIKE ? OR nama_lengkap LIKE ?) ';
+        this.where_semua = ' WHERE 1 ';
+        this.order_nama = ' ORDER BY nama ';
+    }
     //TODO: [ref] dibuat lebih sepesifik
     async baca(select, where, offset, order, data) {
         offset = parseInt(offset + ''); //validate number
@@ -25,18 +26,12 @@ class AnggotaDao {
         let hasil = await Sql_1.sql.query(query, data);
         return hasil;
     }
-    async daftarAnak(rel_id) {
-        let hasil = await Sql_1.sql.query(`
-			SELECT ${this.select_profile}
-			FROM sl_anggota
-			WHERE ortu_id = ?
-			ORDER BY tgl_lahir`, [rel_id]);
-        return hasil;
-    }
-    async jmlCariAnggota(kunci, bani) {
+    //TODO: [ref] bani ambil dari session
+    async jmlCariAnggota(kunci, bani, mode) {
         let kunciSql = `%${kunci}%`;
         let where;
         let data = [];
+        mode; //TODO:
         if ("---" == kunci || "" == kunci || "-" === kunci) {
             where = this.where_semua;
         }
@@ -54,6 +49,7 @@ class AnggotaDao {
 		`, data);
         return hasil[0];
     }
+    //TODO: [ref] ambigue
     async jmlWhere(where, data) {
         let hasil = await Sql_1.sql.query(`
 			SELECT COUNT(id) as jumlah
@@ -62,11 +58,13 @@ class AnggotaDao {
 		`, data);
         return hasil[0];
     }
-    async cariAnggota(kunci, offsetAbs, bani) {
+    //TODO: [ref] bani ambil dari session, mode tidak dipakai
+    async cariAnggota(kunci, offsetAbs, bani, mode) {
         let kunciSql = `%${kunci}%`;
         let where;
         let data = [];
         offsetAbs = parseInt(offsetAbs + '');
+        mode; //TODO:
         if (("-" == kunci) || ("---" == kunci) || ("" == kunci)) {
             where = this.where_semua;
             data = [bani];
@@ -92,20 +90,6 @@ class AnggotaDao {
 			FROM sl_anggota
 			WHERE id = ?
 		`, [id]);
-    }
-    async lihatOrtu(relId) {
-        return await Sql_1.sql.query(`
-			SELECT ${this.select_profile}
-			FROM sl_anggota
-			WHERE rel_id = ?
-		`, [relId]);
-    }
-    async lihatPasangan(id, relId) {
-        return await Sql_1.sql.query(`
-			SELECT ${this.select_profile}
-			FROM sl_anggota
-			WHERE id != ?  AND rel_id = ? 
-		`, [id, relId]);
     }
     //baru
     //====
@@ -135,13 +119,6 @@ class AnggotaDao {
 			SET ?
 			WHERE id = ?
 		`, [data, id]);
-    }
-    async updateOrtu(id, idOrtu) {
-        return await Sql_1.sql.query(`
-			UPDATE sl_anggota
-			SET ortu_id = ?
-			WHERE id = ?
-		`, [idOrtu, id]);
     }
     async updateRel(id, relId) {
         return await Sql_1.sql.query(`

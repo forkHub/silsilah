@@ -1,11 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RelDao = void 0;
 const Sql_1 = require("../../Sql");
 class RelDao {
     async byId(id) {
         return await Sql_1.sql.query(`
-            SELECT id
+            SELECT *
             FROM sl_relasi
             WHERE id = ?
         `, [id]);

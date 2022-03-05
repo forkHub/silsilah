@@ -31,6 +31,11 @@ export class BerandaCont {
 
 			console.debug('def id ' + id);
 
+			console.log("data anggota:");
+			console.log("=============");
+			console.log(anggota);
+			console.log("=============");
+
 			hal = sm.render.silsilah.render(anggota);
 
 			resp.status(200).send(hal);

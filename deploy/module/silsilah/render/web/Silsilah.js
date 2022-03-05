@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Silsilah = void 0;
 const Param_1 = require("../../../Param");
 const Util_1 = require("../../../Util");
 const RouterKons_1 = require("../../RouterKons");

@@ -1,11 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.configDB = void 0;
 exports.configDB = {
     host: 'localhost',
     user: 'root',
     pass: '',
-    db: 'silsilah',
+    db: 'sofwanwe_silsilah',
     port: 3306,
     email: {
         service: '',

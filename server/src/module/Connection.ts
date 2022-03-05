@@ -37,7 +37,9 @@ export class Connection {
 				database: configDB.db,
 				port: configDB.port,
 				multipleStatements: true
-			})
+			});
+			console.log("connection:");
+			console.log(configDB);
 		} catch (e) {
 			console.error(e);
 		}

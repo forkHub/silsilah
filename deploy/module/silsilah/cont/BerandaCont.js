@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BerandaCont = void 0;
 const Util_1 = require("../../Util");
 const SessionData_1 = require("../SessionData");
 const SilsilahModule_1 = require("../SilsilahModule");
@@ -20,11 +19,15 @@ class BerandaCont {
     }
     async renderBeranda(_req, resp) {
         try {
-            let id = (0, SessionData_1.session)(_req).defId;
+            let id = SessionData_1.session(_req).defId;
             let anggotaAr = await SilsilahModule_1.sm.dao.anggota.lihat(id);
             let anggota = anggotaAr[0];
             let hal;
             console.debug('def id ' + id);
+            console.log("data anggota:");
+            console.log("=============");
+            console.log(anggota);
+            console.log("=============");
             hal = SilsilahModule_1.sm.render.silsilah.render(anggota);
             resp.status(200).send(hal);
         }

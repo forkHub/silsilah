@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PilihAnggota = void 0;
 const Param_1 = require("../../../Param");
 const Util_1 = require("../../../Util");
 const Config_1 = require("../../Config");

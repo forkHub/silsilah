@@ -2,7 +2,7 @@ export var configDB: IConfigDB = {
 	host: 'localhost',
 	user: 'root',
 	pass: '',
-	db: 'silsilah',
+	db: 'sofwanwe_silsilah',
 	port: 3306,
 	email: {
 		service: '',

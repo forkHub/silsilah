@@ -1,21 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.v = void 0;
 //NOTE: final
 class Validator {
-    VAL_ANGKA = 1;
-    VAL_TEKS = 2;
-    VAL_PASS = 3;
-    VAL_EMAIL = 5;
-    VAL_USERNAME = 5;
-    VAL_WA = 5;
-    SAN_ESC = 6;
-    field_nama = '';
-    field_panjang_min = '';
-    field_panjang_max = '';
-    ERR_PASS = 'Password mengandung karakter yang tidak diperbolehkan';
-    ERR_PANJANG_MIN = `Panjang minimal ${this.field_nama} adalah ${this.field_panjang_min}`;
-    ERR_PANJANG_MAX = `Panjang minimal ${this.field_nama} adalah ${this.field_panjang_max}`;
+    constructor() {
+        this.VAL_ANGKA = 1;
+        this.VAL_TEKS = 2;
+        this.VAL_PASS = 3;
+        this.VAL_EMAIL = 5;
+        this.VAL_USERNAME = 5;
+        this.VAL_WA = 5;
+        this.SAN_ESC = 6;
+        this.field_nama = '';
+        this.field_panjang_min = '';
+        this.field_panjang_max = '';
+        this.ERR_PASS = 'Password mengandung karakter yang tidak diperbolehkan';
+        this.ERR_PANJANG_MIN = `Panjang minimal ${this.field_nama} adalah ${this.field_panjang_min}`;
+        this.ERR_PANJANG_MAX = `Panjang minimal ${this.field_nama} adalah ${this.field_panjang_max}`;
+    }
     escape(str) {
         let hasil = str || '';
         while (hasil.indexOf("<") > -1) {

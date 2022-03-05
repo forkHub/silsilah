@@ -3,14 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.util = exports.Util = void 0;
 const fs_1 = __importDefault(require("fs"));
 const RouterKons_1 = require("./silsilah/RouterKons");
 class Util {
-    caches = [];
-    _randId = '';
-    _baseDir = '';
-    static revisi = '02';
+    constructor() {
+        this.caches = [];
+        this._randId = '';
+        this._baseDir = '';
+    }
     getUrl(url, params) {
         let urlHasil = url;
         params.forEach((item) => {
@@ -66,7 +66,7 @@ class Util {
         if (path == RouterKons_1.RouterKOns.g_anggota_daftar_kunci_hal) {
             hasil = this.getUrl(path, [kunci, hal]);
         }
-        else if (path == RouterKons_1.RouterKOns.g_anggota_id_pas_tambah_kunci_hal) {
+        else if (path == RouterKons_1.RouterKOns.g_anggota_id_calon_pas_cari_kunci_hal) {
             hasil = this.getUrl(path, [anggota.id, kunci, hal]);
         }
         else if (path == RouterKons_1.RouterKOns.g_anggota_id_anak_tambah_kunci_hal) {
@@ -222,4 +222,5 @@ class Util {
     }
 }
 exports.Util = Util;
+Util.revisi = '02';
 exports.util = new Util();

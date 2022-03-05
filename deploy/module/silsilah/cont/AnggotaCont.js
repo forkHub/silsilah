@@ -3,7 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AnggotaCont = void 0;
 const fs_1 = __importDefault(require("fs"));
 const Util_1 = require("../../Util");
 const Validator_1 = require("../../Validator");
@@ -11,11 +10,12 @@ const Config_1 = require("../Config");
 const RouterKons_1 = require("../RouterKons");
 const SilsilahModule_1 = require("../SilsilahModule");
 const SessionData_1 = require("../SessionData");
+const Kons_1 = require("../../Kons");
 class AnggotaCont {
     async renderDaftarAnggota(_req, resp) {
         try {
-            let anggotaAr = await SilsilahModule_1.sm.dao.anggota.cariAnggota('---', 0, (0, SessionData_1.session)(_req).id);
-            let jml = (await SilsilahModule_1.sm.dao.anggota.jmlCariAnggota('---', (0, SessionData_1.session)(_req).id)).jumlah;
+            let anggotaAr = await SilsilahModule_1.sm.dao.anggota.cariAnggota('---', 0, SessionData_1.session(_req).id, Kons_1.Kons.CARI_NORMAL);
+            let jml = (await SilsilahModule_1.sm.dao.anggota.jmlCariAnggota('---', SessionData_1.session(_req).id, Kons_1.Kons.CARI_NORMAL)).jumlah;
             let hal = SilsilahModule_1.sm.render.daftarAnggota.render(anggotaAr, 0, jml, '---', RouterKons_1.RouterKOns.g_anggota_daftar_kunci_hal);
             resp.status(200).send(hal);
         }
@@ -31,11 +31,11 @@ class AnggotaCont {
             let hal;
             //pasangan info
             if (anggota.rel_id > 0) {
-                let pasAr = await SilsilahModule_1.sm.dao.anggota.lihatPasangan(anggota.id, anggota.rel_id);
+                let pasAr = await SilsilahModule_1.sm.dao.pasangan.lihatPasangan(anggota.id, anggota.rel_id);
                 let pas = pasAr[0];
                 anggota.pas = pas;
                 anggota.rel = (await SilsilahModule_1.sm.dao.rel.byId(anggota.rel_id))[0];
-                anggota.anak = (await SilsilahModule_1.sm.dao.anggota.daftarAnak(anggota.rel_id));
+                anggota.anak = (await SilsilahModule_1.sm.dao.anak.daftarAnak(anggota.rel_id));
             }
             else {
                 anggota.anak = [];
@@ -60,8 +60,8 @@ class AnggotaCont {
         }
     }
     async renderAnakBaru(_req, resp) {
-        let anggotaAr = await SilsilahModule_1.sm.dao.anggota.cariAnggota("-", 0, (0, SessionData_1.session)(_req).id);
-        let jml = (await SilsilahModule_1.sm.dao.anggota.jmlCariAnggota("---", (0, SessionData_1.session)(_req).id)).jumlah;
+        let anggotaAr = await SilsilahModule_1.sm.dao.anggota.cariAnggota("-", 0, SessionData_1.session(_req).id, Kons_1.Kons.CARI_NORMAL);
+        let jml = (await SilsilahModule_1.sm.dao.anggota.jmlCariAnggota("---", SessionData_1.session(_req).id, Kons_1.Kons.CARI_NORMAL)).jumlah;
         let anggota = (await SilsilahModule_1.sm.dao.anggota.lihat(parseInt(_req.params.id)))[0];
         let hal = SilsilahModule_1.sm.render.pilihAnggota.render(anggotaAr, anggota, RouterKons_1.RouterKOns.p_anggota_id_ortu_edit_id, RouterKons_1.RouterKOns.g_anggota_id_anak_tambah_kunci_hal, 'pilih anak', "-", jml, 0);
         resp.status(200).send(hal);
@@ -74,7 +74,7 @@ class AnggotaCont {
         let where = SilsilahModule_1.sm.dao.anggota.where_semua;
         let order = SilsilahModule_1.sm.dao.anggota.order_nama;
         let offsetLog = parseInt(_req.params.hal);
-        let jml = (await SilsilahModule_1.sm.dao.anggota.jmlCariAnggota(kunci, (0, SessionData_1.session)(_req).id)).jumlah;
+        let jml = (await SilsilahModule_1.sm.dao.anggota.jmlCariAnggota(kunci, SessionData_1.session(_req).id, Kons_1.Kons.CARI_NORMAL)).jumlah;
         let kunciSql = '%' + kunci + '%';
         if (!kunci || "-" == kunci) {
             where = SilsilahModule_1.sm.dao.anggota.where_semua;
@@ -84,7 +84,7 @@ class AnggotaCont {
         }
         //fiter bani
         where += " AND bani = ? ";
-        let anggotaAr = await SilsilahModule_1.sm.dao.anggota.baca(select, where, offsetLog * Config_1.config.jmlPerHal, order, [kunciSql, kunciSql, (0, SessionData_1.session)(_req).id]);
+        let anggotaAr = await SilsilahModule_1.sm.dao.anggota.baca(select, where, offsetLog * Config_1.config.jmlPerHal, order, [kunciSql, kunciSql, SessionData_1.session(_req).id]);
         let hal = SilsilahModule_1.sm.render.pilihAnggota.render(anggotaAr, anggota, RouterKons_1.RouterKOns.p_anggota_id_ortu_edit_id, RouterKons_1.RouterKOns.g_anggota_id_anak_tambah_kunci_hal, 'pilih anak', kunci, jml, offsetLog);
         resp.status(200).send(hal);
     }
@@ -92,9 +92,9 @@ class AnggotaCont {
         try {
             let kunci = decodeURI(_req.params.kunci);
             let hal = parseInt(_req.params.hal);
-            let jml = (await SilsilahModule_1.sm.dao.anggota.jmlCariAnggota(kunci, (0, SessionData_1.session)(_req).id)).jumlah;
+            let jml = (await SilsilahModule_1.sm.dao.anggota.jmlCariAnggota(kunci, SessionData_1.session(_req).id, Kons_1.Kons.CARI_NORMAL)).jumlah;
             let offsetAbs = hal * Config_1.config.jmlPerHal;
-            let anggotaAr = await SilsilahModule_1.sm.dao.anggota.cariAnggota(kunci, offsetAbs, (0, SessionData_1.session)(_req).id);
+            let anggotaAr = await SilsilahModule_1.sm.dao.anggota.cariAnggota(kunci, offsetAbs, SessionData_1.session(_req).id, Kons_1.Kons.CARI_NORMAL);
             let str = SilsilahModule_1.sm.render.daftarAnggota.render(anggotaAr, hal, jml, kunci, RouterKons_1.RouterKOns.g_anggota_daftar_kunci_hal);
             resp.status(200).send(str);
         }
@@ -111,6 +111,7 @@ class AnggotaCont {
             Util_1.util.respError(resp, e);
         }
     }
+    //API
     async lihatPasangan(_req, resp) {
         try {
             let id = parseInt(_req.params.id);
@@ -121,7 +122,7 @@ class AnggotaCont {
                 pasangan = [];
             }
             else {
-                pasangan = (await SilsilahModule_1.sm.dao.anggota.lihatPasangan(id, anggota.rel_id));
+                pasangan = (await SilsilahModule_1.sm.dao.pasangan.lihatPasangan(id, anggota.rel_id));
             }
             resp.status(200).send(JSON.stringify(pasangan));
         }
@@ -183,7 +184,7 @@ class AnggotaCont {
                 hasil = [];
             }
             else {
-                hasil = await SilsilahModule_1.sm.dao.anggota.daftarAnak(anggota.rel_id);
+                hasil = await SilsilahModule_1.sm.dao.anak.daftarAnak(anggota.rel_id);
             }
             resp.status(200).send(JSON.stringify(hasil));
         }
@@ -205,7 +206,7 @@ class AnggotaCont {
                 tgl_meninggal: Validator_1.v.escape(_req.body.tgl_meninggal),
                 foto: Validator_1.v.escape(_req.body.foto),
                 thumb: Validator_1.v.escape(_req.body.thumb),
-                bani: (0, SessionData_1.session)(_req).id
+                bani: SessionData_1.session(_req).id
             };
             let hasil = await SilsilahModule_1.sm.dao.anggota.baru(data);
             resp.status(200).send(hasil.insertId + '');
@@ -253,7 +254,7 @@ class AnggotaCont {
         try {
             let id = parseInt(_req.params.id);
             let idOrtu = parseInt(_req.params.id2);
-            await SilsilahModule_1.sm.dao.anggota.updateOrtu(id, idOrtu);
+            await SilsilahModule_1.sm.dao.ortu.updateOrtu(id, idOrtu);
             resp.status(200).send('');
         }
         catch (e) {

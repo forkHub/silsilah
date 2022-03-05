@@ -9,6 +9,10 @@ export class AuthSql {
 			WHERE user_name = ? AND password = ?
 		`, [userName, password]) as ISlAdmin[];
 
+		console.log("login:");
+		console.log("user: " + userName);
+		console.log("pass: " + password);
+
 		return hasil;
 	}
 }

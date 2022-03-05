@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Render = void 0;
 const Param_1 = require("../../Param");
 const AnggotaBaru_1 = require("./AnggotaBaru");
 const Auth_1 = require("./auth/Auth");
@@ -13,14 +12,16 @@ const RouterKons_1 = require("../RouterKons");
 const Util_1 = require("../../Util");
 const Web_1 = require("./web/Web");
 class Render {
-    auth = new Auth_1.Auth();
-    daftarAnggota = new DaftarAnggota_1.DaftarAnggotaRenderer();
-    editBeranda = new EditBeranda_1.EditBeranda();
-    editProfileAnggota = new EditProfileAnggota_1.EditProfileAnggota();
-    anggotaBaru = new AnggotaBaru_1.AnggotaBaru();
-    web = new Web_1.Web();
-    pilihAnggota = new PilihAnggota_1.PilihAnggota();
-    silsilah = new Silsilah_1.Silsilah();
+    constructor() {
+        this.auth = new Auth_1.Auth();
+        this.daftarAnggota = new DaftarAnggota_1.DaftarAnggotaRenderer();
+        this.editBeranda = new EditBeranda_1.EditBeranda();
+        this.editProfileAnggota = new EditProfileAnggota_1.EditProfileAnggota();
+        this.anggotaBaru = new AnggotaBaru_1.AnggotaBaru();
+        this.web = new Web_1.Web();
+        this.pilihAnggota = new PilihAnggota_1.PilihAnggota();
+        this.silsilah = new Silsilah_1.Silsilah();
+    }
     renderCari(status, path, anggota) {
         if (!status)
             return '';
