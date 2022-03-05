@@ -1,12 +1,11 @@
 import { AnakEnt } from "./AnakEnt";
+import { AnggotaEnt } from "./AnggotaEnt";
+import { PasanganEnt } from "./PasanganEnt";
 
 class Entity {
-    private _anak: AnakEnt = new AnakEnt();
-    public get anak(): AnakEnt {
-        return this._anak;
-    }
-
-
+	readonly anak: AnakEnt = new AnakEnt();
+	readonly anggota: AnggotaEnt = new AnggotaEnt();
+	readonly pasangan: PasanganEnt = new PasanganEnt();
 }
 
 export var ent: Entity = new Entity();

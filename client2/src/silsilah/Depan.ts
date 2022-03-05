@@ -1,28 +1,10 @@
 declare var data: ISlAnggota;
 
 namespace ha.sl {
-	export class App {
+	export class Depan {
 		// readonly anggotaDao: AnggotaDao = new AnggotaDao();
 
 		constructor() {
-			// data = {
-			// 	id: 37,
-			// 	nama: 'sofwan',
-			// 	nama_lengkap: 'Sofwan',
-			// 	alamat: 'Surabaya',
-			// 	jkl: 'l',
-			// 	tgl_lahir: '2021-11-07T17:00:00.000Z',
-			// 	tgl_meninggal: '0000-00-00 00:00:00',
-			// 	wa: '',
-			// 	fb: '',
-			// 	instagram: '',
-			// 	thumb: '',
-			// 	foto: '',
-			// 	ortu_id: 0,
-			// 	rel_id: 15,
-			// 	// hapus: 0,
-			// 	// bani: 1
-			// }
 		}
 
 		async loadAnggota(id: number): Promise<ISlAnggota> {
@@ -62,7 +44,12 @@ namespace ha.sl {
 				console.debug('id : ' + (e.currentTarget as HTMLButtonElement).getAttribute('id'));
 
 				let id: string = (e.currentTarget as HTMLButtonElement).getAttribute('id');
-				window.location.href = RouterKOns.server + ha.comp.Util.getUrl(ha.sl.RouterKOns.g_beranda_lihat_id, [id])
+				window.location.href = RouterKOns.server + ha.comp.Util.getUrl(ha.sl.RouterKOns.g_beranda_lihat_id, [id]);
+
+				//load data profile
+				//pindah halaman
+				//render
+				//=> dikasihkan ke api pusat
 			}
 
 			view.profilePasangan.onclick = (e: MouseEvent) => {
@@ -307,12 +294,17 @@ namespace ha.sl {
 
 
 }
-var app: ha.sl.App = new ha.sl.App();
+var app: ha.sl.Depan = new ha.sl.Depan();
+var api: Silsilah;
 
 window.onload = () => {
 	let w: any = window;
 	w.app = app;
 
+	api = window.parent.window.api;
+	console.log(api);
+
+	//TODO: dipindah pakai data asli
 	var data = {
 		id: 37,
 		nama: 'sofwan',
