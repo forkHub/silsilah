@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.authController = exports.AuthController = void 0;
 const blueimp_md5_1 = __importDefault(require("blueimp-md5"));
 const Util_1 = require("../../Util");
 const RouterKons_1 = require("../RouterKons");
@@ -20,14 +21,14 @@ class AuthController {
     async login(_req, resp) {
         try {
             let userName = _req.body.user_name;
-            let password = blueimp_md5_1.default(_req.body.password);
+            let password = (0, blueimp_md5_1.default)(_req.body.password);
             let hasil = await SilsilahModule_1.sm.dao.auth.login(userName, password);
             if (!hasil || hasil.length == 0)
                 throw Error('user name atau password salah');
             let admin = hasil[0];
-            SessionData_1.session(_req).defId = admin.def_id;
-            SessionData_1.session(_req).id = admin.id;
-            SessionData_1.session(_req).statusLogin = true;
+            (0, SessionData_1.session)(_req).defId = admin.def_id;
+            (0, SessionData_1.session)(_req).id = admin.id;
+            (0, SessionData_1.session)(_req).statusLogin = true;
             resp.status(200).send('');
         }
         catch (e) {

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RelDao = void 0;
 const Sql_1 = require("../../Sql");
 class RelDao {
     async byId(id) {

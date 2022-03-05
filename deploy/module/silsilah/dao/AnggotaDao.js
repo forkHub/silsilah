@@ -1,17 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AnggotaDao = void 0;
 const Sql_1 = require("../../Sql");
 const Config_1 = require("../Config");
 //TODO: [ref] nama query lebih semantik
 class AnggotaDao {
-    constructor() {
-        this.select_profile = ` id, nama, nama_lengkap, alamat, jkl, tgl_lahir, tgl_meninggal, wa, fb, instagram, thumb, foto, rel_id, ortu_id`;
-        this.select_nama = ' id, nama, nama_lengkap ';
-        this.where_jkl = ' WHERE jkl = ? ';
-        this.where_cari = ' WHERE (nama LIKE ? OR nama_lengkap LIKE ?) ';
-        this.where_semua = ' WHERE 1 ';
-        this.order_nama = ' ORDER BY nama ';
-    }
+    select_profile = ` id, nama, nama_lengkap, alamat, jkl, tgl_lahir, tgl_meninggal, wa, fb, instagram, thumb, foto, rel_id, ortu_id`;
+    select_nama = ' id, nama, nama_lengkap ';
+    where_jkl = ' WHERE jkl = ? ';
+    where_cari = ' WHERE (nama LIKE ? OR nama_lengkap LIKE ?) ';
+    where_semua = ' WHERE 1 ';
+    order_nama = ' ORDER BY nama ';
     //TODO: [ref] dibuat lebih sepesifik
     async baca(select, where, offset, order, data) {
         offset = parseInt(offset + ''); //validate number

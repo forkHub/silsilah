@@ -1,5 +1,6 @@
 namespace ha.sl {
 	export class RouterKOns {
+		static readonly server: string = "http://localhost:3000";
 
 		static readonly gp_auth_login: string = "/sm/auth/login";
 

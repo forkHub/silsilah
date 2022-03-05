@@ -9,7 +9,7 @@ namespace ha.sl {
 				return [];
 			}
 
-			let h: string = await ha.comp.Util.Ajax2('post', ha.comp.Util.getUrl(RouterKOns.p_anggota_id_anak_baca, [anggota.id]), '');
+			let h: string = await ha.comp.Util.Ajax2('post', RouterKOns.server + ha.comp.Util.getUrl(RouterKOns.p_anggota_id_anak_baca, [anggota.id]), '');
 			return JSON.parse(h) as ISlAnggota[];
 		}
 
@@ -17,7 +17,9 @@ namespace ha.sl {
 			console.group('baca pasangan api:');
 			let pas: ISlAnggota[] = [];
 
-			let url: string = ha.comp.Util.getUrl(RouterKOns.p_anggota_id_pas_lihat, [anggota.id]);
+			let url: string = RouterKOns.server + ha.comp.Util.getUrl(RouterKOns.p_anggota_id_pas_lihat, [anggota.id]);
+			console.debug('url ' + url);
+
 			let hasil: string = await ha.comp.Util.Ajax2('post', url, '');
 			pas = JSON.parse(hasil) as ISlAnggota[];
 

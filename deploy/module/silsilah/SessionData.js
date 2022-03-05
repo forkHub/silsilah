@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.session = void 0;
 class SessionData {
-    constructor() {
-        this._statusLogin = false;
-        this._level = '';
-        this._lapak = '';
-        this._id = 0;
-    }
+    _defId;
+    _statusLogin = false;
+    _level = '';
+    _lapak = '';
+    _id = 0;
     get defId() {
         return this._defId;
     }

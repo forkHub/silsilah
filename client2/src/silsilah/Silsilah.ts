@@ -46,7 +46,7 @@ namespace ha.sl {
 
 			let view: AnggotaView = new AnggotaView();
 			view.nama.innerHTML = anggota.nama;
-			view.img.src = anggota.foto ? anggota.foto : '/gbr/thumb.png';
+			view.img.src = anggota.foto ? anggota.foto : RouterKOns.server + '/gbr/thumb.png';
 			view.foto.style.backgroundImage = 'url(' + view.img.src + ')';
 			view.foto.style.backgroundRepeat = 'no-repeat';
 			view.foto.style.backgroundSize = 'cover';
@@ -62,7 +62,7 @@ namespace ha.sl {
 				console.debug('id : ' + (e.currentTarget as HTMLButtonElement).getAttribute('id'));
 
 				let id: string = (e.currentTarget as HTMLButtonElement).getAttribute('id');
-				window.location.href = ha.comp.Util.getUrl(ha.sl.RouterKOns.g_beranda_lihat_id, [id])
+				window.location.href = RouterKOns.server + ha.comp.Util.getUrl(ha.sl.RouterKOns.g_beranda_lihat_id, [id])
 			}
 
 			view.profilePasangan.onclick = (e: MouseEvent) => {
@@ -136,7 +136,7 @@ namespace ha.sl {
 						console.debug('pasangan loaded');
 						view.anggota.pasangan_id = pas.id;
 						view.anggota.pas = pas;
-						view.imgPasangan.src = pas.foto ? pas.foto : '/gbr/thumb.png';
+						view.imgPasangan.src = pas.foto ? pas.foto : (RouterKOns.server + '/gbr/thumb.png');
 						view.profilePasangan.setAttribute('id', pas.id + '');
 
 						view.fotoPasangan.style.backgroundImage = 'url(' + view.imgPasangan.src + ')';

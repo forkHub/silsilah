@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthSql = void 0;
 const Sql_1 = require("../../Sql");
 class AuthSql {
     async login(userName, password) {

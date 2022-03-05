@@ -1,30 +1,31 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RouterKOns = void 0;
 class RouterKOns {
+    static gp_auth_login = "/sm/auth/login";
+    static gp_auth_logout = "/sm/auth/logout";
+    static g_anggota_daftar = "/sm/anggota/daftar";
+    static g_anggota_daftar_kunci_hal = "/sm/anggota/daftar/kunci/:kunci/hal/:hal";
+    static g_beranda_lihat_id = "/sm/beranda/lihat/:id";
+    static g_beranda_id = "/sm/beranda/:id";
+    static g_anggota_id_info_edit = "/sm/anggota/:id/info/edit";
+    static g_anggota_id_edit_beranda = "/sm/anggota/:id/edit/beranda";
+    static gp_anggota_baru = "/sm/anggota/baru";
+    static p_anggota_hapus_id = "/sm/anggota/hapus/:id";
+    static p_anggota_id_rel_edit_id = "/sm/anggota/:id/rel/edit/:id2";
+    //hanya get
+    //TODO: ambigu
+    static g_anggota_id_calon_pas_cari = "/sm/anggota/:id/pasangan/tambah";
+    static g_anggota_id_calon_pas_cari_kunci_hal = "/sm/anggota/:id/pasangan/tambah/kunci/:kunci/hal/:hal";
+    //post
+    static p_anggota_id_pas_lihat = "/sm/anggota/:id/pasangan/lihat";
+    //post
+    static p_anggota_id_anak_baca = "/sm/anggota/:id/anak/baca";
+    static p_anggota_id_gbr_upload = "/sm/anggota/:id/gbr/upload";
+    static p_anggota_id_ortu_edit_id = "/sm/anggota/:id/ortu/edit/:id2";
+    static g_anggota_id_anak_tambah = "/sm/anggota/:id/anak/tambah";
+    static g_anggota_id_anak_tambah_kunci_hal = "/sm/anggota/:id/anak/tambah/kunci/:kunci/hal/:hal";
+    static rel_daftar = "/sm/rel/daftar";
+    static rel_hapus_id = "/sm/rel/hapus/:id";
 }
 exports.RouterKOns = RouterKOns;
-RouterKOns.gp_auth_login = "/sm/auth/login";
-RouterKOns.gp_auth_logout = "/sm/auth/logout";
-RouterKOns.g_anggota_daftar = "/sm/anggota/daftar";
-RouterKOns.g_anggota_daftar_kunci_hal = "/sm/anggota/daftar/kunci/:kunci/hal/:hal";
-RouterKOns.g_beranda_lihat_id = "/sm/beranda/lihat/:id";
-RouterKOns.g_beranda_id = "/sm/beranda/:id";
-RouterKOns.g_anggota_id_info_edit = "/sm/anggota/:id/info/edit";
-RouterKOns.g_anggota_id_edit_beranda = "/sm/anggota/:id/edit/beranda";
-RouterKOns.gp_anggota_baru = "/sm/anggota/baru";
-RouterKOns.p_anggota_hapus_id = "/sm/anggota/hapus/:id";
-RouterKOns.p_anggota_id_rel_edit_id = "/sm/anggota/:id/rel/edit/:id2";
-//hanya get
-//TODO: ambigu
-RouterKOns.g_anggota_id_calon_pas_cari = "/sm/anggota/:id/pasangan/tambah";
-RouterKOns.g_anggota_id_calon_pas_cari_kunci_hal = "/sm/anggota/:id/pasangan/tambah/kunci/:kunci/hal/:hal";
-//post
-RouterKOns.p_anggota_id_pas_lihat = "/sm/anggota/:id/pasangan/lihat";
-//post
-RouterKOns.p_anggota_id_anak_baca = "/sm/anggota/:id/anak/baca";
-RouterKOns.p_anggota_id_gbr_upload = "/sm/anggota/:id/gbr/upload";
-RouterKOns.p_anggota_id_ortu_edit_id = "/sm/anggota/:id/ortu/edit/:id2";
-RouterKOns.g_anggota_id_anak_tambah = "/sm/anggota/:id/anak/tambah";
-RouterKOns.g_anggota_id_anak_tambah_kunci_hal = "/sm/anggota/:id/anak/tambah/kunci/:kunci/hal/:hal";
-RouterKOns.rel_daftar = "/sm/rel/daftar";
-RouterKOns.rel_hapus_id = "/sm/rel/hapus/:id";

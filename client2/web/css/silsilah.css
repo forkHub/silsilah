@@ -1,3 +1,24 @@
+html, body {
+	margin: 0px;
+	width: 100vw;
+	border: none;
+	box-sizing: border-box;
+}
+
+body {
+	overflow-x: hidden;
+}
+
+iframe.hal-cont {
+	width: 100vw;
+	height: 100vh;
+	border: 1px solid;
+	box-sizing: border-box;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+}
+
 div.silsilah-cont {
 	display:table;
 	table-layout:fixed;

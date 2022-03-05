@@ -6,6 +6,7 @@ html, body, div, header {
 	box-sizing: border-box;
 	padding: 0px;
 	font-family: sans-serif;
+	margin: 0px;
 }
 
 button.tbl-blok {

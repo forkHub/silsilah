@@ -3,13 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Router = void 0;
 const express_1 = __importDefault(require("express"));
 const RouterKons_1 = require("./RouterKons");
 const SilsilahModule_1 = require("./SilsilahModule");
 class Router {
-    constructor() {
-        this.router = express_1.default.Router();
-    }
+    router = express_1.default.Router();
     mapRouter() {
         this.router.get(RouterKons_1.RouterKOns.g_anggota_daftar, SilsilahModule_1.sm.auth.checkAuthGet, SilsilahModule_1.sm.cont.anggota.renderDaftarAnggota);
         this.router.get(RouterKons_1.RouterKOns.g_anggota_daftar_kunci_hal, SilsilahModule_1.sm.auth.checkAuthGet, SilsilahModule_1.sm.cont.anggota.renderDaftarAnggotaCari);

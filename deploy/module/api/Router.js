@@ -3,14 +3,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.api = void 0;
 const express_1 = __importDefault(require("express"));
 const Sql_1 = require("../Sql");
 const Util_1 = require("../Util");
 const Config_1 = require("./Config");
 class Api {
-    constructor() {
-        this.router = express_1.default.Router();
-    }
+    router = express_1.default.Router();
     mapRouter() {
         console.debug('api router');
         this.router.post("/api", (req, resp) => {

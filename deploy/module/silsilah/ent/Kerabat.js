@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Kerabat = void 0;
 const SilsilahModule_1 = require("../SilsilahModule");
 class Kerabat {
     async muat(anggota) {

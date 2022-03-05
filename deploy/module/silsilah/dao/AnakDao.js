@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.AnakDao = void 0;
 const Sql_1 = require("../../Sql");
 const Config_1 = require("../Config");
 class AnakDao {

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RelasiCont = void 0;
 const Util_1 = require("../../Util");
 // import { config } from "../Config";
 const RouterKons_1 = require("../RouterKons");
@@ -49,7 +50,7 @@ class RelasiCont {
             // where += ` AND bani = ? `;
             // data.push(session(_req).id);
             //let anggotaAr: ISlAnggota[] = await sm.dao.anggota.baca(select, where, hal * config.jmlPerHal, order, data);
-            let anggotaAr = await SilsilahModule_1.sm.dao.pasangan.daftarCalonPasangan(kunci, offset, SessionData_1.session(_req).id, jkl);
+            let anggotaAr = await SilsilahModule_1.sm.dao.pasangan.daftarCalonPasangan(kunci, offset, (0, SessionData_1.session)(_req).id, jkl);
             jmlAbs = (await SilsilahModule_1.sm.dao.anggota.jmlWhere(where, data)).jumlah;
             let str = SilsilahModule_1.sm.render.pilihAnggota.render(anggotaAr, anggota, RouterKons_1.RouterKOns.p_anggota_id_rel_edit_id, RouterKons_1.RouterKOns.g_anggota_id_calon_pas_cari_kunci_hal, 'pilih pasangan:', kunci, jmlAbs, hal);
             resp.status(200).send(str);

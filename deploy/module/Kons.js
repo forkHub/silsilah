@@ -1,15 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.kons = exports.Kons = void 0;
 class Kons {
-    constructor() {
-        this.folder_public = '/public/';
-        this.folder_upload = '/public/upload/';
-        this.folder_download = '/upload/';
-    }
+    folder_public = '/public/';
+    folder_upload = '/public/upload/';
+    folder_download = '/upload/';
+    static CARI_NORMAL = 1;
+    static CARI_PASANGAN = 2;
+    static CARI_ANAK = 3;
+    static CARI_ORTU = 4;
 }
 exports.Kons = Kons;
-Kons.CARI_NORMAL = 1;
-Kons.CARI_PASANGAN = 2;
-Kons.CARI_ANAK = 3;
-Kons.CARI_ORTU = 4;
 exports.kons = new Kons();

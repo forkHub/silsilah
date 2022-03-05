@@ -1,11 +1,9 @@
 import { AnakCont } from "./AnakCont";
+import { AnggotaCont } from "./AnggotaCont";
 
 class Cont {
-    private _anak: AnakCont = new AnakCont();
-    public get anak(): AnakCont {
-        return this._anak;
-    }
-
+    readonly anak: AnakCont = new AnakCont();
+    readonly anggota: AnggotaCont = new AnggotaCont();
 
 }
 

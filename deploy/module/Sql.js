@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.sql = void 0;
 const Connection_1 = require("./Connection");
 class Sql {
     async query(query, data) {

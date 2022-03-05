@@ -3,14 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.util = exports.Util = void 0;
 const fs_1 = __importDefault(require("fs"));
 const RouterKons_1 = require("./silsilah/RouterKons");
 class Util {
-    constructor() {
-        this.caches = [];
-        this._randId = '';
-        this._baseDir = '';
-    }
+    caches = [];
+    _randId = '';
+    _baseDir = '';
+    static revisi = '02';
     getUrl(url, params) {
         let urlHasil = url;
         params.forEach((item) => {
@@ -222,5 +222,4 @@ class Util {
     }
 }
 exports.Util = Util;
-Util.revisi = '02';
 exports.util = new Util();

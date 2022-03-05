@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DaftarAnggotaRenderer = void 0;
 const Util_1 = require("../../Util");
 const Config_1 = require("../Config");
 const RouterKons_1 = require("../RouterKons");
