@@ -1,26 +1,27 @@
 class Silsilah {
 	readonly HAL_PROFILE: string = '#hal_depan';
+	readonly data: ha.sl.Data = new ha.sl.Data();
 
 	init(): void {
-
-	}
-
-	pindah(hal: string): void {
-		if (this.HAL_PROFILE == hal) {
-
+		window.onhashchange = () => {
+			console.log('has change');
+			this.data.url = window.location.href;
 		}
-		else {
-			throw new Error('');
-		}
+
+		this.halProfile.src = this.halProfile.getAttribute('data-src') + "?r=" + Math.floor(Math.random() * 1000);
+		this.halDepan.src = this.halDepan.getAttribute('data-src') + "?r=" + Math.floor(Math.random() * 1000);
 	}
 
 	get halProfile(): HTMLIFrameElement {
-		return ha.comp.Util.getEl(this.HAL_PROFILE) as HTMLIFrameElement;
+		return ha.comp.Util.getEl(this.data.HAL_PROFILE) as HTMLIFrameElement;
+	}
+
+	get halDepan(): HTMLIFrameElement {
+		return ha.comp.Util.getEl(this.data.HAL_DEPAN) as HTMLIFrameElement;
 	}
 }
 
-window.onload = () => {
-	let silsilah = new Silsilah();
-	silsilah.init();
-	(window as any).api = silsilah;
-}
+let silsilah = new Silsilah();
+silsilah.init();
+(window as any).api = silsilah;
+console.log('silsilah init');

@@ -60,10 +60,12 @@ export class AuthController {
 		}
 	}
 
+	//TODO: masukin config buat bypass auth
 	checkAuthSession(req: express.Request, resp: express.Response, next: express.NextFunction) {
 		if (!sm.session(req).statusLogin) {
-			resp.status(401).send('belum login');
-			// next();
+			// resp.status(401).send('belum login');
+			resp;
+			next();
 		}
 		else {
 			next();

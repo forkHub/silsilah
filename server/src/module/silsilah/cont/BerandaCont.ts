@@ -38,6 +38,7 @@ export class BerandaCont {
 
 			hal = sm.render.silsilah.render(anggota);
 
+			resp.setHeader("Access-Control-Allow-Origin", "*");
 			resp.status(200).send(hal);
 		}
 		catch (e) {
