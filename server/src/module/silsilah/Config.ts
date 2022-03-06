@@ -4,4 +4,5 @@ export var config = {
 	dev: false,
 	judul: 'silsilah',
 	api: true,
+	loginCheck: false,
 }

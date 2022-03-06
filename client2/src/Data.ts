@@ -7,6 +7,7 @@ namespace ha.sl {
 		private _iframe: string = '';
 		private _url: string = '';
 		private _anggotaAktifId: string = '';
+		private _halDepanDilihat: boolean = false;
 
 		private bindList: IBindObj[] = [];
 
@@ -71,6 +72,14 @@ namespace ha.sl {
 			this._url = value;
 			this.update();
 		}
+
+		public get halDepanDilihat(): boolean {
+			return this._halDepanDilihat;
+		}
+		public set halDepanDilihat(value: boolean) {
+			this._halDepanDilihat = value;
+		}
+
 
 	}
 }

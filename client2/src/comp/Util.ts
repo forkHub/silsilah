@@ -95,6 +95,7 @@ namespace ha.comp {
 					console.group('send data');
 					// console.log(dataStr);
 					console.log("type " + type);
+					console.log('url: ' + url);
 
 					loading.attach(document.body);
 

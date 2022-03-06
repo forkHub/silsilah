@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const cookie_session_1 = __importDefault(require("cookie-session"));
 const Kons_1 = require("./module/Kons");
 const Util_1 = require("./module/Util");
-const Router_1 = require("./module/api/Router");
+// import { api } from "./module/api/Router";
 const SilsilahModule_1 = require("./module/silsilah/SilsilahModule");
 const Connection_1 = require("./module/Connection");
 const Api2_1 = require("./module/api2/Api2");
@@ -40,10 +40,10 @@ try {
         next();
     });
     // app.use("/", toko.router.router)
-    app.use("/", Router_1.api.router);
+    // app.use("/", api.router);
     app.use("/", SilsilahModule_1.sm.router.router);
     app.use("/", Api2_1.api2.router.router);
-    Router_1.api.mapRouter();
+    // api.mapRouter();
     SilsilahModule_1.sm.router.mapRouter();
     Api2_1.api2.router.mapRouter();
     // toko.router.mapRouter();

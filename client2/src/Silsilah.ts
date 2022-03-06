@@ -1,3 +1,4 @@
+
 class Silsilah {
 	readonly HAL_PROFILE: string = '#hal_depan';
 	readonly data: ha.sl.Data = new ha.sl.Data();
@@ -10,6 +11,12 @@ class Silsilah {
 
 		this.halProfile.src = this.halProfile.getAttribute('data-src') + "?r=" + Math.floor(Math.random() * 1000);
 		this.halDepan.src = this.halDepan.getAttribute('data-src') + "?r=" + Math.floor(Math.random() * 1000);
+
+		if (window.location.href.indexOf("#") > -1) {
+			window.location.href = ha.sl.config.server;
+			// throw new Error('');
+			// console.error('url beda');
+		}
 	}
 
 	get halProfile(): HTMLIFrameElement {

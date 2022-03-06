@@ -15,7 +15,7 @@ namespace ha.sl {
 			this.api = (window.parent.window as any).api;
 			this.api.data.reg(() => {
 				console.log('setter');
-				if (this.api.data.url == config.server + this.api.data.HAL_PROFILE) {
+				if (window.top.location.hash == this.api.data.HAL_PROFILE) {
 					console.log('load profile');
 					//loading profile
 					this.loadProfile().then().catch((e) => {
@@ -23,7 +23,7 @@ namespace ha.sl {
 					});
 				}
 				else {
-
+					console.log('hash tidak cocok');
 				}
 			}, () => {
 				console.log('getter');
@@ -32,10 +32,17 @@ namespace ha.sl {
 		}
 
 		async loadProfile(): Promise<void> {
-			// let anggota: ISlAnggota = null;
-			let xml: XMLHttpRequest = await ha.comp.Util.Ajax('post', ha.sl.config.nodeServer + ha.sl.RouterAPI2Kons.api_profile_lihat, '');
+			let data: any = {
+				id: this.api.data.anggotaAktifId
+			};
+
+			let url: string = ha.sl.config.nodeServer + ha.sl.RouterAPI2Kons.api_profile_lihat;
+
+			let xml: XMLHttpRequest = await ha.comp.Util.Ajax('post', url, JSON.stringify(data));
 
 			if (200 == xml.status) {
+				console.log("sukses");
+				console.log(xml.responseText);
 				console.log(JSON.parse(xml.responseText));
 			}
 			else if (401 == xml.status) {
@@ -43,6 +50,7 @@ namespace ha.sl {
 			}
 			else {
 				console.warn('error', xml.statusText);
+				ha.comp.dialog.tampil('Ada kesalahan di server!');
 			}
 		}
 	}

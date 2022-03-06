@@ -7,7 +7,7 @@ namespace ha.sl {
 		}
 
 		init(): void {
-
+			api.data.halDepanDilihat = true;
 		}
 
 		async loadAnggota(id: number): Promise<ISlAnggota> {
@@ -45,16 +45,9 @@ namespace ha.sl {
 
 				console.debug('utama on click');
 				console.debug('id : ' + (e.currentTarget as HTMLButtonElement).getAttribute('id'));
+				api.data.anggotaAktifId = (e.currentTarget as HTMLButtonElement).getAttribute('id');
 
-				// let id: string = (e.currentTarget as HTMLButtonElement).getAttribute('id');
-				// window.location.href = RouterKOns.server + ha.comp.Util.getUrl(ha.sl.RouterKOns.g_beranda_lihat_id, [id]);
-
-				//load data profile
-				//pindah halaman
-				//render
-				//=> dikasihkan ke api pusat
-				window.top.location.href = (config.server + api.data.HAL_PROFILE);
-				// api.data.url = config.server + api.data.HAL_PROFILE;
+				window.top.location.href = (config.server + "/" + api.data.HAL_PROFILE);
 			}
 
 			view.profilePasangan.onclick = (e: MouseEvent) => {

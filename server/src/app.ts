@@ -3,7 +3,7 @@ import cookieSession from "cookie-session";
 import { Server } from "http";
 import { kons } from "./module/Kons";
 import { util } from "./module/Util";
-import { api } from "./module/api/Router";
+// import { api } from "./module/api/Router";
 import { sm } from "./module/silsilah/SilsilahModule";
 import { Connection } from "./module/Connection";
 import { api2 } from "./module/api2/Api2";
@@ -43,11 +43,11 @@ try {
 	});
 
 	// app.use("/", toko.router.router)
-	app.use("/", api.router);
+	// app.use("/", api.router);
 	app.use("/", sm.router.router);
 	app.use("/", api2.router.router);
 
-	api.mapRouter();
+	// api.mapRouter();
 	sm.router.mapRouter();
 	api2.router.mapRouter();
 	// toko.router.mapRouter();
