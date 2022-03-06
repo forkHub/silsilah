@@ -35,11 +35,20 @@ interface ISlAnggota {
 
 	ortu_id?: number,
 	rel_id?: number,
+	bani?: number,
 
 	//external
 	populated?: boolean
 	pas?: ISlAnggota;
 	rel?: ISlRelasi;
+
+	ortu?: ISlAnggota[];
+	saudara?: ISlAnggota[];
+	mbah?: ISlAnggota[];
+	lek?: ISlAnggota[];
+	sepupu?: ISlAnggota[];
+	ponakan?: ISlAnggota[];
+	cucu?: ISlAnggota[];
 
 	pasangan_id?: number,
 	pasangan_nama?: string,

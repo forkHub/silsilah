@@ -109,7 +109,6 @@ export class Profile {
 	}
 
 	private renderPasangan(anggota: ISlAnggota): string {
-
 		if (anggota.pas) {
 			return `
 			<a class="pasangan" href='${util.getUrl(RouterKOns.g_beranda_lihat_id, [anggota.pas.id])}'>${anggota.pas.nama}</a>`;
