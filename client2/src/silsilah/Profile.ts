@@ -19,7 +19,7 @@ namespace ha.sl {
 					console.log('load profile');
 					//loading profile
 					this.loadProfile().then().catch((e) => {
-						console.log(e);
+						console.warn(e);
 					});
 				}
 				else {

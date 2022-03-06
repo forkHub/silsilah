@@ -6,6 +6,7 @@ import { util } from "./module/Util";
 import { api } from "./module/api/Router";
 import { sm } from "./module/silsilah/SilsilahModule";
 import { Connection } from "./module/Connection";
+import { api2 } from "./module/api2/Api2";
 
 const app: express.Express = express();
 const port: number = 3000;
@@ -23,28 +24,32 @@ try {
 		httpOnly: true,
 		maxAge: 1000 * 60 * 60 * 24 * 2
 	}));
-	// app.options('*', function (_req, res) {
-	// 	res.header("Access-Control-Allow-Origin", "*");
-	// 	res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-	// 	res.sendStatus(200);
-	// });
+
+	app.options('*', function (_req, res) {
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+		res.sendStatus(200);
+	});
 
 	app.use(function (_req, res, next) {
 		res.header("Access-Control-Allow-Origin", "*");
 		res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 		// response.setHeader("Access-Control-Allow-Origin", "*");
 		// response.setHeader("Access-Control-Allow-Credentials", "true");
-		// response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+		res.header("Access-Control-Allow-Methods", "OPTIONS,GET,HEAD,POST,PUT");
 		// response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+		res.status(200);
 		next();
 	});
 
 	// app.use("/", toko.router.router)
 	app.use("/", api.router);
 	app.use("/", sm.router.router);
+	app.use("/", api2.router.router);
 
 	api.mapRouter();
 	sm.router.mapRouter();
+	api2.router.mapRouter();
 	// toko.router.mapRouter();
 
 	app.use((_req: express.Request, _resp: express.Response, _next: Function) => {

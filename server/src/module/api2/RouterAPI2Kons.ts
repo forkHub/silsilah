@@ -11,7 +11,7 @@ export class RouterAPI2Kons {
 	static readonly api_anggota_update: string = "./api/anggota/update";
 
 	//profile
-	static readonly api_profile_lihat: string = "./api/profile/lihat";
+	static readonly api_profile_lihat: string = "/api/profile/lihat";
 
 	//anak
 	static readonly api_anak_daftar: string = "./api/anak/daftar";
