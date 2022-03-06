@@ -1,6 +1,121 @@
 namespace ha.sl {
 	class Data {
+		private _nama: string;
+		public get nama(): string {
+			return this._nama;
+		}
+		public set nama(value: string) {
+			this._nama = value;
+			ha.comp.bind.update();
+		}
 
+		private _namaLengkap: string;
+		public get namaLengkap(): string {
+			return this._namaLengkap;
+		}
+		public set namaLengkap(value: string) {
+			this._namaLengkap = value;
+			ha.comp.bind.update();
+		}
+
+		private _jkl: string;
+		public get jkl(): string {
+			return this._jkl;
+		}
+		public set jkl(value: string) {
+			this._jkl = value;
+			ha.comp.bind.update();
+		}
+
+		private _alamat: string;
+		public get alamat(): string {
+			return this._alamat;
+		}
+		public set alamat(value: string) {
+			this._alamat = value;
+			ha.comp.bind.update();
+		}
+
+		private _tglLahir: string;
+		public get tglLahir(): string {
+			return this._tglLahir;
+		}
+		public set tglLahir(value: string) {
+			this._tglLahir = value;
+			ha.comp.bind.update();
+		}
+
+		private _tglMeninggal: string;
+		public get tglMeninggal(): string {
+			return this._tglMeninggal;
+		}
+		public set tglMeninggal(value: string) {
+			this._tglMeninggal = value;
+			ha.comp.bind.update();
+		}
+
+		private _fb: string;
+		public get fb(): string {
+			return this._fb;
+		}
+		public set fb(value: string) {
+			this._fb = value;
+			ha.comp.bind.update();
+		}
+
+		private _wa: string;
+		public get wa(): string {
+			return this._wa;
+		}
+		public set wa(value: string) {
+			this._wa = value;
+			ha.comp.bind.update();
+		}
+
+		private _instagram: string;
+		public get instagram(): string {
+			return this._instagram;
+		}
+		public set instagram(value: string) {
+			this._instagram = value;
+			ha.comp.bind.update();
+		}
+
+		private _pasanganState: string;
+		public get pasanganState(): string {
+			return this._pasanganState;
+		}
+		public set pasanganState(value: string) {
+			this._pasanganState = value;
+			ha.comp.bind.update();
+		}
+
+		private _tautanState: string;
+		public get tautanState(): string {
+			return this._tautanState;
+		}
+		public set tautanState(value: string) {
+			this._tautanState = value;
+			ha.comp.bind.update();
+		}
+
+		private _anakState: string;
+		public get anakState(): string {
+			return this._anakState;
+		}
+		public set anakState(value: string) {
+			this._anakState = value;
+			ha.comp.bind.update();
+		}
+
+		private _kerabatState: string;
+		public get kerabatState(): string {
+			return this._kerabatState;
+		}
+		public set kerabatState(value: string) {
+			this._kerabatState = value;
+			ha.comp.bind.update();
+		}
 	}
 
 	export class Profile {
@@ -14,7 +129,7 @@ namespace ha.sl {
 		}
 
 		init(): void {
-			console.log('get api');
+			console.group('get api profile');
 			console.log(window.parent);
 			console.log(window.parent.window);
 			this.api = (window.parent.window as any).api;
@@ -34,9 +149,31 @@ namespace ha.sl {
 				console.log('getter');
 				return this.api.data.url;
 			});
+
+			this.scanBind();
+
+			console.groupEnd();
 		}
 
 		scanBind(): void {
+			console.group('scan api:');
+
+			document.body.querySelectorAll('[data-bind]').forEach((item: Element) => {
+				let attr: string = item.getAttribute('data-bind');
+				console.log(attr);
+
+				ha.comp.bind.reg(() => {
+					let data: any = this.data;
+					item.innerHTML = data[attr];
+					// console.log('update ' + attr);
+				}, (): string => {
+					let data: any = this.data;
+					return (data[attr] as string);
+				})
+			});
+
+			console.groupEnd();
+
 			//TODO:
 			//ambil semua element dengan data-bind
 			//buat bind
@@ -58,7 +195,16 @@ namespace ha.sl {
 			if (200 == xml.status) {
 				console.log("sukses");
 				console.log(xml.responseText);
-				console.log(JSON.parse(xml.responseText));
+				let angg: ISlAnggota = (JSON.parse(xml.responseText));
+				this.data.alamat = angg.alamat;
+				this.data.nama = angg.nama;
+				this.data.namaLengkap = angg.nama_lengkap;
+				this.data.fb = angg.fb;
+				this.data.instagram = angg.instagram;
+				this.data.jkl = angg.jkl;
+				this.data.tglLahir = angg.tgl_lahir;
+				this.data.tglMeninggal = angg.tgl_meninggal;
+				this.data.wa = angg.wa;
 			}
 			else if (401 == xml.status) {
 				console.log('belum login');

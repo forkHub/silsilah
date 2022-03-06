@@ -19,12 +19,12 @@ namespace ha.comp {
 			this.bindList.forEach((item: IBindObj) => {
 				let data: any = item.getter();
 				if (item.data != data) {
-					console.debug('data terupdate');
+					console.debug('update ');
 					item.setter();
 					item.data = data;
 				}
 				else {
-					console.debug('data tidak terupdate');
+					// console.debug('data tidak terupdate');
 					//debug
 				}
 			})

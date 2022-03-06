@@ -26,7 +26,7 @@ namespace ha.sl {
 		}
 
 		renderAnggota(anggota: ISlAnggota, cont: HTMLDivElement, indek: number, loadOtomatis: boolean): void {
-			console.log('render anggota');
+			console.group('render anggota');
 			console.log(anggota);
 
 			let view: AnggotaView = new AnggotaView();
@@ -76,6 +76,8 @@ namespace ha.sl {
 			if (loadOtomatis) {
 				this.anggotaKlik(view);
 			}
+
+			console.groupEnd();
 		}
 
 		renderHubung(view: Hubung, hubung: number): void {
