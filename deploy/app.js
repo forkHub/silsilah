@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.server = void 0;
 const express_1 = __importDefault(require("express"));
 const cookie_session_1 = __importDefault(require("cookie-session"));
 const Kons_1 = require("./module/Kons");
@@ -11,14 +12,14 @@ const Util_1 = require("./module/Util");
 const SilsilahModule_1 = require("./module/silsilah/SilsilahModule");
 const Connection_1 = require("./module/Connection");
 const Api2_1 = require("./module/api2/Api2");
-const app = express_1.default();
+const app = (0, express_1.default)();
 const port = 3000;
 try {
     Util_1.util.buatRandom();
     Util_1.util.baseDir = __dirname;
     app.use(express_1.default.static(__dirname + Kons_1.kons.folder_public));
     app.use(express_1.default.json({ limit: '5mb' }));
-    app.use(cookie_session_1.default({
+    app.use((0, cookie_session_1.default)({
         name: 'toko_session',
         keys: ['Auni_202002_cookie_session'],
         httpOnly: true,

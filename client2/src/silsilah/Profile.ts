@@ -130,32 +130,34 @@ namespace ha.sl {
 
 		init(): void {
 			console.group('get api profile');
-			console.log(window.parent);
-			console.log(window.parent.window);
+
 			this.api = (window.parent.window as any).api;
+
 			this.api.data.reg(() => {
 				console.log('setter');
-				if (window.top.location.hash == this.api.data.HAL_PROFILE) {
-					console.log('load profile');
-					//loading profile
-					this.loadProfile().then().catch((e) => {
-						console.warn(e);
-					});
-				}
-				else {
-					console.log('hash tidak cocok');
-				}
+				console.log('load profile');
+
+				this.loadProfile().then().catch((e) => {
+					console.warn(e);
+				});
+
 			}, () => {
 				console.log('getter');
-				return this.api.data.url;
+				return this.api.data.anggotaAktifId;
 			});
 
 			this.scanBind();
+			if (this.api.data.anggotaAktifId != '') {
+				this.loadProfile().then().catch((e) => {
+					console.warn(e);
+				});
+			}
 
 			console.groupEnd();
 		}
 
 		gantiId(id: string): boolean {
+			console.log('ganti id ' + id);
 			try {
 				this.api.data.anggotaAktifId = id;
 			}
@@ -199,6 +201,9 @@ namespace ha.sl {
 				id: this.api.data.anggotaAktifId
 			};
 
+			console.log('load profile');
+			console.log(data);
+
 			let url: string = ha.sl.config.nodeServer + ha.sl.RouterAPI2Kons.api_profile_lihat;
 
 			let xml: XMLHttpRequest = await ha.comp.Util.Ajax('post', url, JSON.stringify(data));
@@ -235,7 +240,7 @@ namespace ha.sl {
 		renderPasangan(anggota: ISlAnggota): string {
 			if (anggota.pas) {
 				return `
-				<a class="pasangan" href='#' onclick="profile.gantiId(${anggota.pasangan_id});return false;">${anggota.pas.nama}</a>`;
+				<a class="pasangan" href='#' onclick="profile.gantiId(${anggota.pas.id});">${anggota.pas.nama}</a>`;
 			}
 			else {
 				return `<p class="text-muted font-size-sm">tidak ada data</p>`;
@@ -299,7 +304,7 @@ namespace ha.sl {
 			daftar.forEach((anggota: ISlAnggota) => {
 				let el: string = `
 				<div class='margin-bottom-8' id=${anggota.id}>
-					<a class="" href="${ha.comp.Util.getUrl(RouterKOns.g_beranda_lihat_id, [anggota.id])}">${anggota.nama_lengkap} (${label})</a>
+					<a class="" href="#">${anggota.nama_lengkap} (${label})</a>
 				</div>`;
 
 				hasil += el;

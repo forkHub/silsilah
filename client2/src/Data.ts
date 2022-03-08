@@ -66,7 +66,9 @@ namespace ha.sl {
 		}
 		public set anggotaAktifId(value: string) {
 			this._anggotaAktifId = value;
+			this.update();
 		}
+
 		public get url(): string {
 			return this._url;
 		}
@@ -80,6 +82,7 @@ namespace ha.sl {
 		}
 		public set halDepanDilihat(value: boolean) {
 			this._halDepanDilihat = value;
+			this.update();
 		}
 
 
