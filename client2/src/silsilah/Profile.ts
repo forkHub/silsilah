@@ -155,6 +155,17 @@ namespace ha.sl {
 			console.groupEnd();
 		}
 
+		gantiId(id: string): boolean {
+			try {
+				this.api.data.anggotaAktifId = id;
+			}
+			catch (e) {
+				console.error(e);
+			}
+
+			return false;
+		}
+
 		scanBind(): void {
 			console.group('scan api:');
 
@@ -224,7 +235,7 @@ namespace ha.sl {
 		renderPasangan(anggota: ISlAnggota): string {
 			if (anggota.pas) {
 				return `
-				<a class="pasangan" href='${ha.comp.Util.getUrl(RouterKOns.g_beranda_lihat_id, [anggota.pas.id])}'>${anggota.pas.nama}</a>`;
+				<a class="pasangan" href='#' onclick="profile.gantiId(${anggota.pasangan_id});return false;">${anggota.pas.nama}</a>`;
 			}
 			else {
 				return `<p class="text-muted font-size-sm">tidak ada data</p>`;
@@ -323,7 +334,8 @@ namespace ha.sl {
 	}
 }
 
+var profile: ha.sl.Profile;
 window.onload = () => {
-	let profile: ha.sl.Profile = new ha.sl.Profile();
+	profile = new ha.sl.Profile();
 	profile.init();
 }
