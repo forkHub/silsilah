@@ -1,1 +1,1 @@
-bind dipisah
+aktifkan login

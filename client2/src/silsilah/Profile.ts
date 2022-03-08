@@ -168,6 +168,19 @@ namespace ha.sl {
 			return false;
 		}
 
+		halSilsilah(id: string): boolean {
+			console.log('halaman silsilah ' + id);
+			try {
+				this.api.data.anggotaAktifId = id;
+				window.top.location.href = (config.server + "/" + this.api.data.HAL_DEPAN);
+			}
+			catch (e) {
+				console.error(e);
+			}
+
+			return false;
+		}
+
 		scanBind(): void {
 			console.group('scan api:');
 
@@ -304,7 +317,7 @@ namespace ha.sl {
 			daftar.forEach((anggota: ISlAnggota) => {
 				let el: string = `
 				<div class='margin-bottom-8' id=${anggota.id}>
-					<a class="" href="#">${anggota.nama_lengkap} (${label})</a>
+					<a class="" href="#"onclick="profile.gantiId(${anggota.id});">${anggota.nama_lengkap} (${label})</a>
 				</div>`;
 
 				hasil += el;
@@ -324,7 +337,7 @@ namespace ha.sl {
 			anggotaAr.forEach((anggota: ISlAnggota) => {
 				let el: string = `
 				<div class='margin-bottom-8' id=${anggota.id}>
-					<a class="" href="${ha.comp.Util.getUrl(RouterKOns.g_beranda_lihat_id, [anggota.id])}">${anggota.nama_lengkap}</a>
+					<a class="" href="#" onclick="profile.gantiId(${anggota.id});">${anggota.nama_lengkap}</a>
 				</div>`;
 
 				hasil += el;
@@ -334,7 +347,8 @@ namespace ha.sl {
 		}
 
 		private renderTautan(anggota: ISlAnggota): string {
-			return `<a href="${ha.comp.Util.getUrl("", [anggota.id])}">tautan silsilah</a>`;
+			anggota;//TODO:
+			return `<a href="#" onclick="event.preventDefault();profile.halSilsilah(${anggota.id});return false;">tautan silsilah</a>`;
 		}
 	}
 }
