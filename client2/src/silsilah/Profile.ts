@@ -205,6 +205,12 @@ namespace ha.sl {
 				this.data.tglLahir = angg.tgl_lahir;
 				this.data.tglMeninggal = angg.tgl_meninggal;
 				this.data.wa = angg.wa;
+
+				ha.comp.Util.getElByNama('pasangan-cont', document.body).innerHTML = this.renderPasangan(angg);
+				ha.comp.Util.getElByNama('anak-cont', document.body).innerHTML = this.renderDaftarAnak(angg.anak);
+				ha.comp.Util.getElByNama('kerabat-cont', document.body).innerHTML = this.renderKerabat(angg);
+				ha.comp.Util.getElByNama('tautan-cont', document.body).innerHTML = this.renderTautan(angg);
+
 			}
 			else if (401 == xml.status) {
 				console.log('belum login');
@@ -245,7 +251,7 @@ namespace ha.sl {
 					else {
 						dhe = 'paklek';
 					}
-					hasil += this.renderDaftar([item], dhe);
+					hasil += this.renderkerabat2([item], dhe);
 				}
 				else {
 					if (this.tglLebihBesar(anggota.tgl_lahir, item.tgl_lahir)) {
@@ -254,7 +260,7 @@ namespace ha.sl {
 					else {
 						dhe = 'bulek';
 					}
-					hasil += this.renderDaftar([item], dhe);
+					hasil += this.renderkerabat2([item], dhe);
 				}
 			});
 
@@ -264,19 +270,19 @@ namespace ha.sl {
 		renderKerabat(anggota: ISlAnggota): string {
 			let hasil: string = '';
 
-			hasil += this.renderDaftar(anggota.mbah, 'mbah');
-			hasil += this.renderDaftar(anggota.ortu, 'orang tua');
+			hasil += this.renderkerabat2(anggota.mbah, 'mbah');
+			hasil += this.renderkerabat2(anggota.ortu, 'orang tua');
 			hasil += this.renderLek(anggota);
-			hasil += this.renderDaftar(anggota.saudara, 'saudara');
-			hasil += this.renderDaftar(anggota.sepupu, 'sepupu');
-			hasil += this.renderDaftar(anggota.ponakan, 'ponakan');
-			hasil += this.renderDaftar(anggota.cucu, 'cucu');
+			hasil += this.renderkerabat2(anggota.saudara, 'saudara');
+			hasil += this.renderkerabat2(anggota.sepupu, 'sepupu');
+			hasil += this.renderkerabat2(anggota.ponakan, 'ponakan');
+			hasil += this.renderkerabat2(anggota.cucu, 'cucu');
 
 			return hasil;
 		}
 
 		//render daftar kerabat detail
-		private renderDaftar(daftar: ISlAnggota[], label: string): string {
+		private renderkerabat2(daftar: ISlAnggota[], label: string): string {
 			let hasil: string = '';
 
 			daftar.forEach((anggota: ISlAnggota) => {
@@ -309,6 +315,10 @@ namespace ha.sl {
 			});
 
 			return hasil;
+		}
+
+		private renderTautan(anggota: ISlAnggota): string {
+			return `<a href="${ha.comp.Util.getUrl("", [anggota.id])}">tautan silsilah</a>`;
 		}
 	}
 }

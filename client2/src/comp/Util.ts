@@ -6,6 +6,27 @@ namespace ha.comp {
 		static readonly sFilter: string = 'filter';
 		static readonly storageId: string = 'xyz.hagarden.tugas';
 
+		static getElByNama(nama: string, parent: HTMLElement, err: boolean = true): HTMLElement {
+			let el: NodeListOf<Element>;
+			if (!parent) parent = document.body;
+
+			el = parent.querySelectorAll(`[data-nama=${nama}]`);
+
+
+			if (el && el.length == 1) {
+				return el[0] as HTMLElement
+			} else {
+				console.log(parent);
+				console.log(nama);
+				if (err) {
+					throw new Error('query not found ');
+				}
+				else {
+					return null;
+				}
+			}
+		}
+
 		static getEl(query: string, parent: HTMLElement = null, err: boolean = true): HTMLElement {
 			let el: HTMLElement;
 			if (!parent) parent = document.body;
