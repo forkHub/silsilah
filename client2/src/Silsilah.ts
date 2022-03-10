@@ -1,6 +1,6 @@
 
 class Silsilah {
-	readonly HAL_PROFILE: string = '#hal_depan';
+	// readonly HAL_PROFILE: string = '#hal_depan';
 	readonly data: ha.sl.Data = new ha.sl.Data();
 
 	init(): void {
@@ -17,7 +17,15 @@ class Silsilah {
 			// throw new Error('');
 			// console.error('url beda');
 		}
+
+		// api.data.reg(() => {
+
+		// }, () => {
+		// 	return api.data.anggotaAktifId;
+		// })
 	}
+
+	// loadP
 
 	get halProfile(): HTMLIFrameElement {
 		return ha.comp.Util.getEl(this.data.HAL_PROFILE) as HTMLIFrameElement;

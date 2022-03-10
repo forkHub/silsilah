@@ -6,15 +6,50 @@ namespace ha.sl {
 		constructor() {
 		}
 
-		init(): void {
+		async init(): Promise<void> {
 			api.data.halDepanDilihat = true;
+
+			if (api.data.anggotaAktifId != '') {
+				this.loadAnggota(api.data.anggotaAktifId);
+			};
+
+			api.data.reg(() => {
+				this.loadAnggota(api.data.anggotaAktifId);
+			}, () => {
+				return api.data.anggotaAktifId;
+			});
+
+
 		}
 
-		async loadAnggota(id: number): Promise<ISlAnggota> {
-			let anggota: ISlAnggota = (await ha.sl.anggotaDao.bacaId(id))[0];
-			anggota.populated = false;
-			anggota.anak = [];
-			return anggota;
+		async loadAnggota(id: string): Promise<void> {
+			let data: any = {
+				id: id
+			};
+
+			console.log('load anak');
+			console.log(data);
+
+			let url: string = ha.sl.config.nodeServer + ha.sl.RouterAPI2Kons.api_anggota_lihat;
+
+			let xml: XMLHttpRequest = await ha.comp.Util.Ajax('post', url, JSON.stringify(data));
+
+			if (200 == xml.status) {
+				console.log("sukses");
+				console.log(xml.responseText);
+				let angg: ISlAnggota = (JSON.parse(xml.responseText));
+				this.renderAnggota(angg, document.body.querySelector('div.silsilah-cont') as HTMLDivElement, -1, true);
+				// return angg;
+			}
+			else if (401 == xml.status) {
+				console.log('belum login');
+				return null;
+			}
+			else {
+				console.warn('error', xml.statusText);
+				ha.comp.dialog.tampil('Ada kesalahan di server!');
+				return null;
+			}
 		}
 
 		async loadAnak(anggota: ISlAnggota): Promise<void> {
@@ -304,26 +339,7 @@ window.onload = () => {
 
 	app.init();
 
-	//TODO: dipindah pakai data asli
-	var data = {
-		id: 37,
-		nama: 'sofwan',
-		nama_lengkap: 'Sofwan',
-		alamat: 'Surabaya',
-		jkl: 'l',
-		tgl_lahir: '2021-11-07T17:00:00.000Z',
-		tgl_meninggal: '0000-00-00 00:00:00',
-		wa: '',
-		fb: '',
-		instagram: '',
-		thumb: '',
-		foto: '',
-		ortu_id: 0,
-		rel_id: 15,
-		// hapus: 0,
-		// bani: 1
-	}
-	app.renderAnggota(data, document.body.querySelector('div.silsilah-cont') as HTMLDivElement, -1, true);
+	api.data.anggotaAktifId = ha.sl.config.defaultId + '';
 
 	window.document.body.onclick = () => {
 		console.log('window on click')

@@ -1,11 +1,11 @@
+// import { Anggota } from "../../silsilah/ent/Anggota";
 import { AnakDao } from "./AnakDao";
+import { AnggotaDao } from "./AnggotaDao";
 
 
 class Dao {
-    private _anak: AnakDao = new AnakDao();
-    public get anak(): AnakDao {
-        return this._anak;
-    }
+    readonly anak: AnakDao = new AnakDao();
+    readonly anggota: AnggotaDao = new AnggotaDao();
 
 }
 

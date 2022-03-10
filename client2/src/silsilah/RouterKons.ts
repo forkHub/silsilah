@@ -6,6 +6,7 @@ namespace ha.sl {
 		static readonly api_auth_logout: string = "/api/auth/logout";
 
 		//anggota
+		static readonly api_anggota_lihat: string = "./api/anggota/lihat";
 		static readonly api_anggota_daftar: string = "/api/anggota/daftar";
 		static readonly api_anggota_edit: string = "/api/anggota/edit";
 		static readonly api_anggota_hapus: string = "/api/anggota/hapus";
