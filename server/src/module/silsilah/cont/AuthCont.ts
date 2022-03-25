@@ -22,10 +22,12 @@ export class AuthController {
 			let userName: string = _req.body.user_name;
 			let password: string = md5(_req.body.password);
 
-
 			let hasil: ISlAdmin[] = await sm.dao.auth.login(userName, password);
 
-			if (!hasil || hasil.length == 0) throw Error('user name atau password salah');
+			if (!hasil || hasil.length == 0) {
+				console.log('username: ' + userName + '/pass: ' + password);
+				throw Error('user name atau password salah');
+			}
 
 			let admin: ISlAdmin = hasil[0];
 
@@ -33,7 +35,7 @@ export class AuthController {
 			session(_req).id = admin.id;
 			session(_req).statusLogin = true;
 
-			resp.status(200).send('');
+			resp.status(200).send(admin.def_id + '');
 		}
 		catch (e) {
 			util.respError(resp, e);

@@ -2,55 +2,46 @@ namespace ha.sl {
 	export class Data {
 		readonly HAL_PROFILE: string = '#hal_profile';
 		readonly HAL_DEPAN: string = '#hal_depan';
-		// readonly server: string = 
+		readonly HAL_LOGIN: string = '#hal_login';
 
 		private _iframe: string = '';
 		private _url: string = '';
 		private _anggotaAktifId: string = '';
 		private _halDepanDilihat: boolean = false;
+		private _halTerakhir: string;
+		private _halRedirect: string;
+		private _halTarget: string;
+		private _loginTerakhir: number = 0;
 
-		// private bindList: IBindObj[] = [];
-
-		reg(setter: Function, getter: Function): void {
-			// let bindObj = {
-			// 	data: '',
-			// 	setter: setter,
-			// 	getter: getter
-			// }
-			ha.comp.bind.reg(setter, getter);
-			// this.bindList.push(bindObj);
-
-			// let data: any = bindObj.getter();
-			// bindObj.data = this.serialize(data);
+		public get loginTerakhir(): number {
+			return this._loginTerakhir;
+		}
+		public set loginTerakhir(value: number) {
+			this._loginTerakhir = value;
 		}
 
-		// serialize(data: any): string {
-		// 	try {
-		// 		return JSON.stringify(data);
-		// 	}
-		// 	catch (e) {
-		// 		return data + '';
-		// 	}
-		// }
+
+		public get halTarget(): string {
+			return this._halTarget;
+		}
+		public set halTarget(value: string) {
+			this._halTarget = value;
+		}
+
+		public get halRedirect(): string {
+			return this._halRedirect;
+		}
+		public set halRedirect(value: string) {
+			this._halRedirect = value;
+		}
+
+		reg(setter: Function, getter: Function): void {
+			ha.comp.bind.reg(setter, getter);
+		}
 
 		update(): void {
 			ha.comp.bind.update();
-			// console.log('update');
-			// this.bindList.forEach((item: IBindObj) => {
-			// 	let data: any = item.getter();
-			// 	data = this.serialize(data);
-			// 	if (item.data != data) {
-			// 		console.debug('data terupdate');
-			// 		item.setter();
-			// 		item.data = data;
-			// 	}
-			// 	else {
-			// 		console.log('data tidak terupdate');
-			// 		//debug
-			// 	}
-			// })
 		}
-
 
 		public get iframe(): string {
 			return this._iframe;
@@ -83,6 +74,12 @@ namespace ha.sl {
 		public set halDepanDilihat(value: boolean) {
 			this._halDepanDilihat = value;
 			this.update();
+		}
+		public get halTerakhir(): string {
+			return this._halTerakhir;
+		}
+		public set halTerakhir(value: string) {
+			this._halTerakhir = value;
 		}
 
 

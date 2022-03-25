@@ -6,12 +6,20 @@ namespace ha.comp {
 		static readonly sFilter: string = 'filter';
 		static readonly storageId: string = 'xyz.hagarden.tugas';
 
+		static delay = async (m: number = 0): Promise<void> => {
+			return new Promise((resolve, _reject) => {
+				setTimeout(() => {
+					resolve();
+				}, m);
+			})
+		}
+
+
 		static getElByNama(nama: string, parent: HTMLElement, err: boolean = true): HTMLElement {
 			let el: NodeListOf<Element>;
 			if (!parent) parent = document.body;
 
 			el = parent.querySelectorAll(`[data-nama=${nama}]`);
-
 
 			if (el && el.length == 1) {
 				return el[0] as HTMLElement
@@ -51,7 +59,12 @@ namespace ha.comp {
 		//default error
 		static error(e: Error): void {
 			console.error(e);
-			dialog.tampil(e.message);
+			if (!e.message) {
+				dialog.tampil('ada kesalahan');
+			}
+			else {
+				dialog.tampil(e.message);
+			}
 		}
 
 		//shared
@@ -103,7 +116,16 @@ namespace ha.comp {
 			throw Error(x.responseText);
 		}
 
-		static async Ajax(type: string, url: string, dataStr: string, pf: (p: ProgressEvent) => void = null): Promise<XMLHttpRequest> {
+		static async Ajax3(type: string, url: string, dataStr: string, pf: (p: ProgressEvent) => void = null): Promise<XMLHttpRequest> {
+			try {
+				return await this.Ajax(type, url, dataStr, pf);
+			}
+			catch (e) {
+				throw e;
+			}
+		}
+
+		static Ajax(type: string, url: string, dataStr: string, pf: (p: ProgressEvent) => void = null): Promise<XMLHttpRequest> {
 			return new Promise((resolve: any, reject: any) => {
 				try {
 					console.group('send data');

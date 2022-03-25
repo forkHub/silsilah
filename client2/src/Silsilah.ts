@@ -1,6 +1,5 @@
 
 class Silsilah {
-	// readonly HAL_PROFILE: string = '#hal_depan';
 	readonly data: ha.sl.Data = new ha.sl.Data();
 
 	init(): void {
@@ -9,23 +8,57 @@ class Silsilah {
 			this.data.url = window.location.href;
 		}
 
-		this.halProfile.src = this.halProfile.getAttribute('data-src') + "?r=" + Math.floor(Math.random() * 1000);
-		this.halDepan.src = this.halDepan.getAttribute('data-src') + "?r=" + Math.floor(Math.random() * 1000);
-
 		if (window.location.href.indexOf("#") > -1) {
 			window.location.href = ha.sl.config.server;
-			// throw new Error('');
-			// console.error('url beda');
+		}
+		else {
+			this.gantiHal(this.data.HAL_DEPAN);
 		}
 
-		// api.data.reg(() => {
+		this.data.reg(() => {
+			this.gantiHal(api.data.halTarget);
+		}, () => {
+			return api.data.halTarget;
+		})
 
-		// }, () => {
-		// 	return api.data.anggotaAktifId;
-		// })
 	}
 
-	// loadP
+	gantiHal(url: string): void {
+		console.log('ganti hal, url: ' + url);
+		console.log('url aktif' + window.top.location.href);
+		window.top.location.href = ha.sl.config.server + "/" + url;
+
+		let iframe: HTMLIFrameElement = this.getHal(url);
+		if (iframe.src == "") {
+			iframe.onload = () => {
+				this.setApi(iframe).then(() => {
+					console.log('api set');
+					// console.log()
+				}).catch((e) => {
+					console.warn(e);
+				});
+			}
+			iframe.src = iframe.getAttribute('data-src') + "?r=" + Math.floor(Math.random() * 1000);
+		}
+	}
+
+	async setApi(iframe: HTMLIFrameElement): Promise<void> {
+		for (let i: number = 0; i < 3; i++) {
+			try {
+				(iframe.contentWindow as any).api = this;
+				break;
+			}
+			catch (e) {
+				console.warn(e);
+				ha.comp.Util.delay(1000);
+			}
+		}
+	}
+
+
+	getHal(url: string): HTMLIFrameElement {
+		return ha.comp.Util.getEl(url) as HTMLIFrameElement;
+	}
 
 	get halProfile(): HTMLIFrameElement {
 		return ha.comp.Util.getEl(this.data.HAL_PROFILE) as HTMLIFrameElement;

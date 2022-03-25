@@ -2,22 +2,45 @@ declare var data: ISlAnggota;
 
 namespace ha.sl {
 	export class Depan {
+		private tungguLogin: boolean = false;
 
 		constructor() {
+		}
+
+		async tungguApi(): Promise<void> {
+			while (!api) {
+				ha.comp.Util.delay(1000);
+			}
 		}
 
 		async init(): Promise<void> {
 			api.data.halDepanDilihat = true;
 
 			if (api.data.anggotaAktifId != '') {
-				this.loadRenderAnggota(api.data.anggotaAktifId);
+				this.loadRenderAnggota(api.data.anggotaAktifId).catch((e) => {
+					ha.comp.Util.error(e);
+				});
 			}
 
 			api.data.reg(() => {
-				this.loadRenderAnggota(api.data.anggotaAktifId);
+				if (this.tungguLogin) return;
+				this.loadRenderAnggota(api.data.anggotaAktifId).catch((e) => {
+					ha.comp.Util.error(e);
+				});
 			}, () => {
 				return api.data.anggotaAktifId;
 			});
+
+			api.data.reg(() => {
+				if (this.tungguLogin) {
+					this.tungguLogin = false;
+					this.loadRenderAnggota(api.data.anggotaAktifId).catch((e) => {
+						ha.comp.Util.error(e);
+					});
+				}
+			}, () => {
+				return api.data.loginTerakhir;
+			})
 
 			if (config.defaultId > 0) {
 				api.data.anggotaAktifId = config.defaultId + '';
@@ -30,32 +53,33 @@ namespace ha.sl {
 				id: id
 			};
 
-			// console.log('load anak');
-			// console.log(data);
-
 			let url: string = ha.sl.config.nodeServer + ha.sl.RouterAPI2Kons.api_anggota_lihat;
 
-			let xml: XMLHttpRequest = await ha.comp.Util.Ajax('post', url, JSON.stringify(data));
+			try {
+				let xml: XMLHttpRequest = await ha.comp.Util.Ajax('post', url, JSON.stringify(data));
 
-			if (200 == xml.status) {
-				console.log("sukses");
-				// console.log(xml.responseText);
-				let angg: ISlAnggota = (JSON.parse(xml.responseText));
-				let cont: HTMLDivElement = document.body.querySelector('div.silsilah-cont') as HTMLDivElement;
-				cont.innerHTML = '';
-				this.renderAnggota(angg, cont, -1, true);
-				// return angg;
+				if (200 == xml.status) {
+					console.log("sukses");
+					let angg: ISlAnggota = (JSON.parse(xml.responseText));
+					let cont: HTMLDivElement = document.body.querySelector('div.silsilah-cont') as HTMLDivElement;
+					cont.innerHTML = '';
+					this.renderAnggota(angg, cont, -1, true);
+				}
+				else if (401 == xml.status) {
+					console.log('belum login');
+					api.data.halRedirect = api.data.HAL_DEPAN;
+					api.data.halTarget = api.data.HAL_LOGIN;
+					this.tungguLogin = true;
+				}
+				else {
+					console.warn('error', xml.statusText);
+					ha.comp.dialog.tampil('Ada kesalahan di server!');
+				}
 			}
-			else if (401 == xml.status) {
-				console.log('belum login');
-				//TODO: goto login page
-				return null;
+			catch (e) {
+				ha.comp.Util.error(e);
 			}
-			else {
-				console.warn('error', xml.statusText);
-				ha.comp.dialog.tampil('Ada kesalahan di server!');
-				return null;
-			}
+
 		}
 
 		async loadAnak(anggota: ISlAnggota): Promise<void> {
@@ -384,13 +408,13 @@ var api: Silsilah;
 window.onload = () => {
 	var app: ha.sl.Depan = new ha.sl.Depan();
 
-	console.log('get api');
-	api = (window.parent.window as any).api as Silsilah;
-	console.log(api);
+	app.tungguApi().then(() => {
+		app.init();
+		api.data.anggotaAktifId = ha.sl.config.defaultId + '';
+	}).catch((e) => {
+		ha.comp.Util.error(e);
+	})
 
-	app.init();
-
-	api.data.anggotaAktifId = ha.sl.config.defaultId + '';
 
 	window.document.body.onclick = () => {
 		console.log('window on click')
