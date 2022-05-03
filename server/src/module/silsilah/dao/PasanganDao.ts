@@ -12,7 +12,7 @@ export class PasanganDao {
 	}
 
 	//TODO: [ref] bani ambil dari session
-	async jmlCariPasangan(kunci: string, offsetAbs: number, bani: number, jkl: number): Promise<IJUmlah> {
+	async jmlCariPasangan(kunci: string, offsetAbs: number, bani: number, jkl: string): Promise<number> {
 		let kunciSql: string = `%${kunci}%`;
 		let where: string;
 		let data: any[] = [];
@@ -37,7 +37,7 @@ export class PasanganDao {
 			${where}
 		`, data) as IJUmlah[];
 
-		return hasil[0];
+		return hasil[0].jumlah;
 	}
 
 	async daftarCalonPasangan(kunci: string, offsetAbs: number, bani: number, jkl: string): Promise<ISlAnggota[]> {
