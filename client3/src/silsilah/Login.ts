@@ -20,11 +20,9 @@ namespace ha.sl {
                                 ha.comp.dialog.tampil('Username / password salah');
                             }
                             else if (200 == x.status) {
-                                if (api) {
-                                    console.log('anggota aktif id: ' + x.responseText);
-                                    api.data.anggotaAktifId = x.responseText;
-                                    api.data.halTarget = api.data.halRedirect;
-                                }
+                                window.top.location.href = config.server + '/index.html';
+                                // var app: ha.sl.Depan = new ha.sl.Depan();
+                                // app.init();
                             }
                             else {
                                 throw Error(x.responseText);
@@ -61,7 +59,7 @@ namespace ha.sl {
     export var login: Login = new Login();
 }
 
-var api: Silsilah;
+// var api: Silsilah;
 window.onload = () => {
     console.log('hal login on load');
     ha.sl.login.init();

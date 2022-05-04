@@ -43,6 +43,7 @@ class SessionData implements ISessionData {
 
 export function session(req: express.Request): ISessionData {
 	if (!req.session) {
+		console.debug('session tidak ada, buat yang baru')
 		req.session = new SessionData();
 	}
 

@@ -12,6 +12,8 @@ export class AuthSql {
 		console.log("login:");
 		console.log("user: " + userName);
 		console.log("pass: " + password);
+		console.log('hasil');
+		console.log(hasil);
 
 		return hasil;
 	}

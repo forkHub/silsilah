@@ -29,8 +29,8 @@ export class RouterKOns {
 
 	static readonly p_anggota_id_ortu_edit_id: string = "/sm/anggota/:id/ortu/edit/:id2";
 
-	static readonly g_anggota_id_anak_tambah: string = "/sm/anggota/:id/anak/tambah";
-	static readonly g_anggota_id_anak_tambah_kunci_hal: string = "/sm/anggota/:id/anak/tambah/kunci/:kunci/hal/:hal";
+	static readonly g_anggota_id_calonAnak: string = "/sm/anggota/:id/anak/tambah";
+	static readonly g_anggota_id_calonAnak_cari: string = "/sm/anggota/:id/anak/tambah/kunci/:kunci/hal/:hal";
 
 	static readonly rel_daftar: string = "/sm/rel/daftar";
 	static readonly rel_hapus_id: string = "/sm/rel/hapus/:id";

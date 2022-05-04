@@ -6,14 +6,14 @@ import { config } from "../Config";
 import { RouterKOns } from "../RouterKons";
 import { sm } from "../SilsilahModule";
 import { session } from "../SessionData";
-import { Kons } from "../../Kons";
+// import { Kons } from "../../Kons";
 
 export class AnggotaCont {
 
 	async renderDaftarAnggota(_req: express.Request, resp: express.Response): Promise<void> {
 		try {
-			let anggotaAr: ISlAnggota[] = await sm.dao.anggota.cariAnggota('---', 0, session(_req).id, Kons.CARI_NORMAL);
-			let jml: number = (await sm.dao.anggota.jmlCariAnggota('---', session(_req).id, Kons.CARI_NORMAL)).jumlah;
+			let anggotaAr: ISlAnggota[] = await sm.dao.anggota.cariAnggota('---', 0);
+			let jml: number = (await sm.dao.anggota.jmlCariAnggota('---')).jumlah;
 
 			let hal: string = sm.render.daftarAnggota.render(anggotaAr, 0, jml, '---', RouterKOns.g_anggota_daftar_kunci_hal);
 			resp.status(200).send(hal);
@@ -70,16 +70,16 @@ export class AnggotaCont {
 		}
 	}
 
-	async renderAnakBaru(_req: express.Request, resp: express.Response): Promise<void> {
-		let anggotaAr: ISlAnggota[] = await sm.dao.anggota.cariAnggota("-", 0, session(_req).id, Kons.CARI_NORMAL);
-		let jml: number = (await sm.dao.anggota.jmlCariAnggota("---", session(_req).id, Kons.CARI_NORMAL)).jumlah
+	async renderDaftarCalonAnak(_req: express.Request, resp: express.Response): Promise<void> {
+		let anggotaAr: ISlAnggota[] = await sm.dao.anggota.cariAnggota("-", 0);
+		let jml: number = (await sm.dao.anggota.jmlCariAnggota("---")).jumlah
 		let anggota: ISlAnggota = (await sm.dao.anggota.lihat(parseInt(_req.params.id)))[0];
 
 		let hal: string = sm.render.pilihAnggota.render(
 			anggotaAr,
 			anggota,
 			RouterKOns.p_anggota_id_ortu_edit_id,
-			RouterKOns.g_anggota_id_anak_tambah_kunci_hal,
+			RouterKOns.g_anggota_id_calonAnak_cari,
 			'pilih anak',
 			"-",
 			jml,
@@ -88,7 +88,7 @@ export class AnggotaCont {
 		resp.status(200).send(hal);
 	}
 
-	async renderAnakBaruCari(_req: express.Request, resp: express.Response): Promise<void> {
+	async renderDaftarCalonAnakCari(_req: express.Request, resp: express.Response): Promise<void> {
 		let id: number = parseInt(_req.params.id);
 		let kunci: string = decodeURI(_req.params.kunci);
 		let anggota: ISlAnggota = (await sm.dao.anggota.lihat(id))[0];
@@ -96,7 +96,7 @@ export class AnggotaCont {
 		let where: string = sm.dao.anggota.where_semua;
 		let order: string = sm.dao.anggota.order_nama;
 		let offsetLog: number = parseInt(_req.params.hal);
-		let jml: number = (await sm.dao.anggota.jmlCariAnggota(kunci, session(_req).id, Kons.CARI_NORMAL)).jumlah;
+		let jml: number = (await sm.dao.anggota.jmlCariAnggota(kunci)).jumlah;
 		let kunciSql: string = '%' + kunci + '%';
 
 		if (!kunci || "-" == kunci) {
@@ -107,11 +107,11 @@ export class AnggotaCont {
 		}
 
 		//fiter bani
-		where += " AND bani = ? "
+		// where += " AND bani = ? "
 
 		let anggotaAr: ISlAnggota[] = await sm.dao.anggota.baca(select, where, offsetLog * config.jmlPerHal, order, [kunciSql, kunciSql, session(_req).id]);
 
-		let hal: string = sm.render.pilihAnggota.render(anggotaAr, anggota, RouterKOns.p_anggota_id_ortu_edit_id, RouterKOns.g_anggota_id_anak_tambah_kunci_hal, 'pilih anak', kunci, jml, offsetLog);
+		let hal: string = sm.render.pilihAnggota.render(anggotaAr, anggota, RouterKOns.p_anggota_id_ortu_edit_id, RouterKOns.g_anggota_id_calonAnak_cari, 'pilih anak', kunci, jml, offsetLog);
 
 		resp.status(200).send(hal);
 	}
@@ -120,9 +120,9 @@ export class AnggotaCont {
 		try {
 			let kunci: string = decodeURI(_req.params.kunci);
 			let hal: number = parseInt(_req.params.hal);
-			let jml: number = (await sm.dao.anggota.jmlCariAnggota(kunci, session(_req).id, Kons.CARI_NORMAL)).jumlah;
+			let jml: number = (await sm.dao.anggota.jmlCariAnggota(kunci)).jumlah;
 			let offsetAbs: number = hal * config.jmlPerHal;
-			let anggotaAr: ISlAnggota[] = await sm.dao.anggota.cariAnggota(kunci, offsetAbs, session(_req).id, Kons.CARI_NORMAL);
+			let anggotaAr: ISlAnggota[] = await sm.dao.anggota.cariAnggota(kunci, offsetAbs);
 
 			let str: string = sm.render.daftarAnggota.render(anggotaAr, hal, jml, kunci, RouterKOns.g_anggota_daftar_kunci_hal);
 

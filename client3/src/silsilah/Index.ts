@@ -2,49 +2,44 @@ declare var data: ISlAnggota;
 
 namespace ha.sl {
 	export class Depan {
-		private tungguLogin: boolean = false;
+		// private tungguLogin: boolean = false;
 
 		constructor() {
 		}
 
-		async tungguApi(): Promise<void> {
-			while (!api) {
-				ha.comp.Util.delay(1000);
-			}
-		}
-
 		async init(): Promise<void> {
-			api.data.halDepanDilihat = true;
+			await this.loadRenderAnggota(config.defaultId);
+			// api.data.halDepanDilihat = true;
 
-			if (api.data.anggotaAktifId != '') {
-				this.loadRenderAnggota(api.data.anggotaAktifId).catch((e) => {
-					ha.comp.Util.error(e);
-				});
-			}
+			// if (api.data.anggotaAktifId != '') {
+			// 	this.loadRenderAnggota(api.data.anggotaAktifId).catch((e) => {
+			// 		ha.comp.Util.error(e);
+			// 	});
+			// }
 
-			api.data.reg(() => {
-				if (this.tungguLogin) return;
-				this.loadRenderAnggota(api.data.anggotaAktifId).catch((e) => {
-					ha.comp.Util.error(e);
-				});
-			}, () => {
-				return api.data.anggotaAktifId;
-			});
+			// api.data.reg(() => {
+			// 	if (this.tungguLogin) return;
+			// 	this.loadRenderAnggota(api.data.anggotaAktifId).catch((e) => {
+			// 		ha.comp.Util.error(e);
+			// 	});
+			// }, () => {
+			// 	return api.data.anggotaAktifId;
+			// });
 
-			api.data.reg(() => {
-				if (this.tungguLogin) {
-					this.tungguLogin = false;
-					this.loadRenderAnggota(api.data.anggotaAktifId).catch((e) => {
-						ha.comp.Util.error(e);
-					});
-				}
-			}, () => {
-				return api.data.loginTerakhir;
-			})
+			// api.data.reg(() => {
+			// 	if (this.tungguLogin) {
+			// 		this.tungguLogin = false;
+			// 		this.loadRenderAnggota(api.data.anggotaAktifId).catch((e) => {
+			// 			ha.comp.Util.error(e);
+			// 		});
+			// 	}
+			// }, () => {
+			// 	return api.data.loginTerakhir;
+			// })
 
-			if (config.defaultId > 0) {
-				api.data.anggotaAktifId = config.defaultId + '';
-			}
+			// if (config.defaultId > 0) {
+			// 	api.data.anggotaAktifId = config.defaultId + '';
+			// }
 
 		}
 
@@ -67,9 +62,12 @@ namespace ha.sl {
 				}
 				else if (401 == xml.status) {
 					console.log('belum login');
-					api.data.halRedirect = api.data.HAL_DEPAN;
-					api.data.halTarget = api.data.HAL_LOGIN;
-					this.tungguLogin = true;
+					// api.data.halRedirect = api.data.HAL_DEPAN;
+					// api.data.halTarget = api.data.HAL_LOGIN;
+					// this.tungguLogin = true;
+
+					//TODO: goto login page
+					// window.top.location.href = './login.html';
 				}
 				else {
 					console.warn('error', xml.statusText);
@@ -289,9 +287,9 @@ namespace ha.sl {
 
 			console.debug('utama on click');
 			console.debug('id : ' + (e.currentTarget as HTMLButtonElement).getAttribute('id'));
-			api.data.anggotaAktifId = (e.currentTarget as HTMLButtonElement).getAttribute('id');
 
-			window.top.location.href = (config.server + "/" + api.data.HAL_PROFILE);
+			let id: string = (e.currentTarget as HTMLButtonElement).getAttribute('id');
+			window.top.location.href = (config.server + "/profile.html?id=" + id);
 		}
 
 		async profilePasanganKlik(e: MouseEvent): Promise<void> {
@@ -302,9 +300,9 @@ namespace ha.sl {
 			console.debug('id : ' + (e.currentTarget as HTMLButtonElement).getAttribute('id'));
 
 			let id: string = (e.currentTarget as HTMLButtonElement).getAttribute('id');
-			api.data.anggotaAktifId = id;
+			// api.data.anggotaAktifId = id;
 
-			window.top.location.href = (config.server + "/" + api.data.HAL_PROFILE);
+			window.top.location.href = (config.server + "/profile.html?id=" + id);
 		}
 
 	}
@@ -400,20 +398,20 @@ namespace ha.sl {
 
 
 	}
-
 }
 
-var api: Silsilah;
+// var api: Silsilah;
 
 window.onload = () => {
 	var app: ha.sl.Depan = new ha.sl.Depan();
+	app.init();
 
-	app.tungguApi().then(() => {
-		app.init();
-		api.data.anggotaAktifId = ha.sl.config.defaultId + '';
-	}).catch((e) => {
-		ha.comp.Util.error(e);
-	})
+	// app.tungguApi().then(() => {
+	// 	app.init();
+	// 	api.data.anggotaAktifId = ha.sl.config.defaultId + '';
+	// }).catch((e) => {
+	// 	ha.comp.Util.error(e);
+	// })
 
 
 	window.document.body.onclick = () => {

@@ -33,13 +33,10 @@ export class AnggotaDao {
 		return hasil;
 	}
 
-	//TODO: [ref] bani ambil dari session
-	async jmlCariAnggota(kunci: string, bani: number, mode: number): Promise<IJUmlah> {
+	async jmlCariAnggota(kunci: string): Promise<IJUmlah> {
 		let kunciSql: string = `%${kunci}%`;
 		let where: string;
 		let data: any[] = [];
-
-		mode; //TODO:
 
 		if ("---" == kunci || "" == kunci || "-" === kunci) {
 			where = this.where_semua;
@@ -48,10 +45,6 @@ export class AnggotaDao {
 			where = this.where_cari;
 			data = [kunciSql, kunciSql];
 		}
-
-		//filter bani
-		where += ' AND bani = ? ';
-		data.push(bani);
 
 		let hasil: IJUmlah[] = await sql.query(`
 			SELECT COUNT(id) as jumlah
@@ -73,27 +66,21 @@ export class AnggotaDao {
 		return hasil[0];
 	}
 
-	//TODO: [ref] bani ambil dari session, mode tidak dipakai
-	async cariAnggota(kunci: string, offsetAbs: number, bani: number, mode: number): Promise<ISlAnggota[]> {
+	async cariAnggota(kunci: string, offsetAbs: number): Promise<ISlAnggota[]> {
 		let kunciSql: string = `%${kunci}%`;
 		let where: string;
 		let data: any[] = [];
 
 		offsetAbs = parseInt(offsetAbs + '');
 
-		mode; //TODO:
-
 		if (("-" == kunci) || ("---" == kunci) || ("" == kunci)) {
 			where = this.where_semua;
-			data = [bani];
+			data = [];
 		}
 		else {
 			where = this.where_cari;
-			data = [kunciSql, kunciSql, bani];
+			data = [kunciSql, kunciSql];
 		}
-
-		//filter bani
-		where += " AND bani = ? ";
 
 		return await sql.query(` 
 			SELECT ${this.select_nama}
@@ -136,14 +123,13 @@ export class AnggotaDao {
 		`, [id]) as unknown as IHasilQuery;
 	}
 
-	//TODO: [ref] refaktor edit pakai ini
+	//TODO: terlalu open
 	async update(data: ISlAnggota, id: number): Promise<IHasilQuery> {
 		return await sql.query(`
 			UPDATE sl_anggota
 			SET ?
 			WHERE id = ?
 		`, [data, id]) as unknown as IHasilQuery
-
 	}
 
 	async updateRel(id: number, relId: number): Promise<IHasilQuery> {

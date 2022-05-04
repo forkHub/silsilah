@@ -1,11 +1,11 @@
 import express from "express";
 import { util } from "../../Util";
 import { RouterKOns } from "../RouterKons";
-import { session } from "../SessionData";
+// import { session } from "../SessionData";
 import { sm } from "../SilsilahModule";
 
 export class RelasiCont {
-	//TODO: abs
+	//TODO: dipindah ke pasangan cont atau di rename
 	async renderTambahPasangan(_req: express.Request, resp: express.Response): Promise<void> {
 		try {
 			let id: number = parseInt(_req.params.id);
@@ -50,8 +50,8 @@ export class RelasiCont {
 			// where += ` AND bani = ? `;
 			// data.push(session(_req).id);
 
-			let anggotaAr: ISlAnggota[] = await sm.dao.pasangan.daftarCalonPasangan(kunci, offset, session(_req).id, jkl);
-			jmlAbs = (await sm.dao.pasangan.jmlCariPasangan(kunci, offset, session(_req).id, jkl));
+			let anggotaAr: ISlAnggota[] = await sm.dao.pasangan.daftarCalonPasangan(kunci, offset, jkl);
+			jmlAbs = (await sm.dao.pasangan.jmlCariPasangan(kunci, offset, jkl));
 
 			let str: string = sm.render.pilihAnggota.render(
 				anggotaAr,

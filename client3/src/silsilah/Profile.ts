@@ -120,66 +120,60 @@ namespace ha.sl {
 
 	export class Profile {
 		readonly data: Data = new Data();
-		private _api: Silsilah;
-		public get api(): Silsilah {
-			return this._api;
-		}
-		public set api(value: Silsilah) {
-			this._api = value;
-		}
 
 		init(): void {
 			// console.group('get api profile');
 
-			this.api = (window.parent.window as any).api;
+			// this.api = (window.parent.window as any).api;
 
-			this.api.data.reg(() => {
-				// console.log('setter');
-				// console.log('load profile');
+			// this.api.data.reg(() => {
+			// 	// console.log('setter');
+			// 	// console.log('load profile');
 
-				this.loadProfile().then().catch((e) => {
-					console.warn(e);
-				});
+			// 	this.loadProfile().then().catch((e) => {
+			// 		console.warn(e);
+			// 	});
 
-			}, () => {
-				// console.log('getter');
-				return this.api.data.anggotaAktifId;
-			});
+			// }, () => {
+			// 	// console.log('getter');
+			// 	return this.api.data.anggotaAktifId;
+			// });
 
 			this.scanBind();
-			if (this.api.data.anggotaAktifId != '') {
-				this.loadProfile().then().catch((e) => {
-					console.warn(e);
-				});
-			}
+
+			// if (this.api.data.anggotaAktifId != '') {
+			// 	this.loadProfile().then().catch((e) => {
+			// 		console.warn(e);
+			// 	});
+			// }
 
 			console.groupEnd();
 		}
 
-		gantiId(id: string): boolean {
-			console.log('ganti id ' + id);
-			try {
-				this.api.data.anggotaAktifId = id;
-			}
-			catch (e) {
-				console.error(e);
-			}
+		// gantiId(id: string): boolean {
+		// 	console.log('ganti id ' + id);
+		// 	try {
+		// 		this.api.data.anggotaAktifId = id;
+		// 	}
+		// 	catch (e) {
+		// 		console.error(e);
+		// 	}
 
-			return false;
-		}
+		// 	return false;
+		// }
 
-		halSilsilah(id: string): boolean {
-			console.log('halaman silsilah ' + id);
-			try {
-				this.api.data.anggotaAktifId = id;
-				window.top.location.href = (config.server + "/" + this.api.data.HAL_DEPAN);
-			}
-			catch (e) {
-				console.error(e);
-			}
+		// halSilsilah(id: string): boolean {
+		// 	console.log('halaman silsilah ' + id);
+		// 	try {
+		// 		this.api.data.anggotaAktifId = id;
+		// 		window.top.location.href = (config.server + "/" + this.api.data.HAL_DEPAN);
+		// 	}
+		// 	catch (e) {
+		// 		console.error(e);
+		// 	}
 
-			return false;
-		}
+		// 	return false;
+		// }
 
 		scanBind(): void {
 			// console.group('scan api:');
@@ -202,8 +196,9 @@ namespace ha.sl {
 		}
 
 		async loadProfile(): Promise<void> {
+
 			let data: any = {
-				id: this.api.data.anggotaAktifId
+				// id: this.api.data.anggotaAktifId
 			};
 
 			// console.log('load profile');

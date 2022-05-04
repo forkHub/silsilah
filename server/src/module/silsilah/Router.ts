@@ -14,8 +14,8 @@ export class Router {
 		this.router.get(RouterKOns.g_anggota_id_info_edit, sm.auth.checkAuthGet, sm.cont.anggota.renderEditProfileAnggota);
 		this.router.get(RouterKOns.g_anggota_id_edit_beranda, sm.auth.checkAuthGet, sm.cont.anggota.renderEditBerandaById);
 		this.router.get(RouterKOns.gp_anggota_baru, sm.auth.checkAuthGet, sm.cont.anggota.renderAnggotaBaru);
-		this.router.get(RouterKOns.g_anggota_id_anak_tambah, sm.auth.checkAuthGet, sm.cont.anggota.renderAnakBaru);
-		this.router.get(RouterKOns.g_anggota_id_anak_tambah_kunci_hal, sm.auth.checkAuthGet, sm.cont.anggota.renderAnakBaruCari);
+		this.router.get(RouterKOns.g_anggota_id_calonAnak, sm.auth.checkAuthGet, sm.cont.anggota.renderDaftarCalonAnak);
+		this.router.get(RouterKOns.g_anggota_id_calonAnak_cari, sm.auth.checkAuthGet, sm.cont.anggota.renderDaftarCalonAnakCari);
 
 		this.router.get(RouterKOns.g_anggota_id_calon_pas_cari, sm.auth.checkAuthGet, sm.cont.relasi.renderTambahPasangan);
 		this.router.get(RouterKOns.g_anggota_id_calon_pas_cari_kunci_hal, sm.auth.checkAuthGet, sm.cont.relasi.renderTambahPasangan);

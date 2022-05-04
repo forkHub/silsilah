@@ -35,6 +35,8 @@ export class AuthController {
 			session(_req).id = admin.id;
 			session(_req).statusLogin = true;
 
+			console.log('validate login status: ' + session(_req).statusLogin);
+
 			resp.status(200).send(admin.def_id + '');
 		}
 		catch (e) {
@@ -54,7 +56,7 @@ export class AuthController {
 
 	//check auth middle ware
 	checkAuthGet(req: express.Request, resp: express.Response, next: express.NextFunction) {
-		if (!sm.session(req).statusLogin) {
+		if (!session(req).statusLogin) {
 			resp.status(401).redirect(RouterKOns.gp_auth_login);
 		}
 		else {
@@ -64,7 +66,7 @@ export class AuthController {
 
 	//TODO: masukin config buat bypass auth
 	checkAuthSession(req: express.Request, resp: express.Response, next: express.NextFunction) {
-		if (!sm.session(req).statusLogin) {
+		if (!session(req).statusLogin) {
 			// resp.status(401).send('belum login');
 			resp;
 			next();

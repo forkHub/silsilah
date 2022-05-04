@@ -129,7 +129,7 @@ export class EditBeranda {
 					<button
 						class="btn btn-primary col-12 col-sm-6"
 						${Param.HA_KLIK} 
-						${Param.HA_GET}="${util.getUrl(RouterKOns.g_anggota_id_anak_tambah, [anggota.id + '', '0'])}"> 
+						${Param.HA_GET}="${util.getUrl(RouterKOns.g_anggota_id_calonAnak, [anggota.id + '', '0'])}"> 
 							tambah anak
 					</button>`;
 

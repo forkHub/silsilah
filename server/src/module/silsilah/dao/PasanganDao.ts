@@ -11,8 +11,7 @@ export class PasanganDao {
 		`, [id, relId]) as ISlAnggota[];
 	}
 
-	//TODO: [ref] bani ambil dari session
-	async jmlCariPasangan(kunci: string, offsetAbs: number, bani: number, jkl: string): Promise<number> {
+	async jmlCariPasangan(kunci: string, offsetAbs: number, jkl: string): Promise<number> {
 		let kunciSql: string = `%${kunci}%`;
 		let where: string;
 		let data: any[] = [];
@@ -20,15 +19,18 @@ export class PasanganDao {
 		offsetAbs = parseInt(offsetAbs + '');
 
 		if (("-" == kunci) || ("---" == kunci) || ("" == kunci)) {
-			where = "WHERE  1  AND bani = ? AND jkl = ? ";
-			data = [bani, jkl];
+			where = "WHERE  1  AND jkl = ? ";
+			data = [jkl];
 		}
 		else {
 			where = ` 
-				WHERE (nama LIKE ? OR nama_lengkap LIKE ?)  
-				AND bani = ? AND jkl = ?
+				WHERE (
+					nama LIKE ? 
+					OR nama_lengkap LIKE ?
+				)
+				AND jkl = ?
 			`;
-			data = [kunciSql, kunciSql, bani, jkl];
+			data = [kunciSql, kunciSql, jkl];
 		}
 
 		let hasil: IJUmlah[] = await sql.query(`
@@ -40,7 +42,7 @@ export class PasanganDao {
 		return hasil[0].jumlah;
 	}
 
-	async daftarCalonPasangan(kunci: string, offsetAbs: number, bani: number, jkl: string): Promise<ISlAnggota[]> {
+	async daftarCalonPasangan(kunci: string, offsetAbs: number, jkl: string): Promise<ISlAnggota[]> {
 		let kunciSql: string = `%${kunci}%`;
 		let where: string;
 		let data: any[] = [];
@@ -48,15 +50,15 @@ export class PasanganDao {
 		offsetAbs = parseInt(offsetAbs + '');
 
 		if (("-" == kunci) || ("---" == kunci) || ("" == kunci)) {
-			where = "WHERE  1  AND bani = ? AND jkl = ? ";
-			data = [bani, jkl];
+			where = "WHERE  1 AND jkl = ? ";
+			data = [jkl];
 		}
 		else {
 			where = ` 
 				WHERE (nama LIKE ? OR nama_lengkap LIKE ?)  
-				AND bani = ? AND jkl = ?
+				AND jkl = ?
 			`;
-			data = [kunciSql, kunciSql, bani, jkl];
+			data = [kunciSql, kunciSql, jkl];
 		}
 
 		return await sql.query(` 
