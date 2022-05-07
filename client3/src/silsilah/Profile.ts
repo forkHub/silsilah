@@ -121,7 +121,6 @@ namespace ha.sl {
 	export class Profile {
 		readonly data: Data = new Data();
 
-
 		async init(): Promise<void> {
 			this.scanBind();
 
@@ -149,31 +148,6 @@ namespace ha.sl {
 
 			return id;
 		}
-
-		// gantiId(id: string): boolean {
-		// 	console.log('ganti id ' + id);
-		// 	try {
-		// 		this.api.data.anggotaAktifId = id;
-		// 	}
-		// 	catch (e) {
-		// 		console.error(e);
-		// 	}
-
-		// 	return false;
-		// }
-
-		// halSilsilah(id: string): boolean {
-		// 	console.log('halaman silsilah ' + id);
-		// 	try {
-		// 		this.api.data.anggotaAktifId = id;
-		// 		window.top.location.href = (config.server + "/" + this.api.data.HAL_DEPAN);
-		// 	}
-		// 	catch (e) {
-		// 		console.error(e);
-		// 	}
-
-		// 	return false;
-		// }
 
 		scanBind(): void {
 			// console.group('scan api:');
@@ -215,8 +189,8 @@ namespace ha.sl {
 				this.data.fb = angg.fb;
 				this.data.instagram = angg.instagram;
 				this.data.jkl = angg.jkl;
-				this.data.tglLahir = angg.tgl_lahir;
-				this.data.tglMeninggal = angg.tgl_meninggal;
+				this.data.tglLahir = this.dateTimeStamp(angg.tgl_lahir);
+				this.data.tglMeninggal = this.dateTimeStamp(angg.tgl_meninggal);
 				this.data.wa = angg.wa;
 
 				ha.comp.Util.getElByNama('pasangan-cont', document.body).innerHTML = this.renderPasangan(angg);
