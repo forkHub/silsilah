@@ -3,8 +3,8 @@ import { Util, util } from "../../Util";
 import { RouterKOns } from "../RouterKons";
 
 export class EditProfileAnggota {
-	render(anggota: ISlAnggota): string {
-		return `
+    render(anggota: ISlAnggota): string {
+        return `
 		<!DOCTYPE html>
 		<html lang="id">
         <head>
@@ -144,26 +144,26 @@ export class EditProfileAnggota {
             <script type="module" src="/js${Util.revisi}/comp/Umum.js?r=${util.randId}"></script>
         </body>
 		</html>`;
-	}
+    }
 
-	private selected(anggota: ISlAnggota, value: string): string {
-		if (anggota.jkl == value) return "checked";
-		return "";
-	}
+    private selected(anggota: ISlAnggota, value: string): string {
+        if (anggota.jkl == value) return "checked";
+        return "";
+    }
 
-	private formatDate(str: string): string {
-		if (!str || "" == str) return '';
+    private formatDate(str: string): string {
+        if (!str || "" == str) return '';
 
-		let date: Date = new Date(str);
+        let date: Date = new Date(str);
 
-		if ('Invalid Date' == (date + '')) return '';
+        if ('Invalid Date' == (date + '')) return '';
 
-		return ` value="` + date.getFullYear() + "-" + this.padding(date.getMonth() + '') + "-" + this.padding(date.getDate() + '') + '"';
-	}
+        return ` value="` + date.getFullYear() + "-" + this.padding((date.getMonth() + 1) + '') + "-" + this.padding(date.getDate() + '') + '"';
+    }
 
-	private padding(str: string): string {
-		str = "00000" + str;
-		return str.slice(str.length - 2);
-	}
+    private padding(str: string): string {
+        str = "00000" + str;
+        return str.slice(str.length - 2);
+    }
 
 }

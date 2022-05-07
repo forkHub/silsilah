@@ -121,33 +121,33 @@ namespace ha.sl {
 	export class Profile {
 		readonly data: Data = new Data();
 
-		init(): void {
-			// console.group('get api profile');
 
-			// this.api = (window.parent.window as any).api;
-
-			// this.api.data.reg(() => {
-			// 	// console.log('setter');
-			// 	// console.log('load profile');
-
-			// 	this.loadProfile().then().catch((e) => {
-			// 		console.warn(e);
-			// 	});
-
-			// }, () => {
-			// 	// console.log('getter');
-			// 	return this.api.data.anggotaAktifId;
-			// });
-
+		async init(): Promise<void> {
 			this.scanBind();
 
-			// if (this.api.data.anggotaAktifId != '') {
-			// 	this.loadProfile().then().catch((e) => {
-			// 		console.warn(e);
-			// 	});
-			// }
+			let id: string = this.getId();
+			this.loadProfile(id);
+		}
 
-			console.groupEnd();
+		getId(): string {
+			let id: string;
+
+			//get id
+			console.log('get Id:');
+			console.log(window.top.location.search);
+
+			let search: string[] = window.top.location.search.slice(1).split('&');
+			console.log('search:');
+			console.log(search);
+
+			search.forEach((item: string) => {
+				let kv: string[] = item.split('=');
+				if ('id' == kv[0]) {
+					id = kv[1]
+				}
+			})
+
+			return id;
 		}
 
 		// gantiId(id: string): boolean {
@@ -195,22 +195,19 @@ namespace ha.sl {
 			console.groupEnd();
 		}
 
-		async loadProfile(): Promise<void> {
+		async loadProfile(id: string): Promise<void> {
 
 			let data: any = {
-				// id: this.api.data.anggotaAktifId
+				id: id
 			};
 
-			// console.log('load profile');
-			// console.log(data);
+			console.log('load profile');
+			console.log(data);
 
 			let url: string = ha.sl.config.nodeServer + ha.sl.RouterAPI2Kons.api_profile_lihat;
-
 			let xml: XMLHttpRequest = await ha.comp.Util.Ajax('post', url, JSON.stringify(data));
 
 			if (200 == xml.status) {
-				// console.log("sukses");
-				// console.log(xml.responseText);
 				let angg: ISlAnggota = (JSON.parse(xml.responseText));
 				this.data.alamat = angg.alamat;
 				this.data.nama = angg.nama;
@@ -334,7 +331,26 @@ namespace ha.sl {
 		}
 
 		private renderTautan(anggota: ISlAnggota): string {
-			return `<a href="#" onclick="event.preventDefault();profile.halSilsilah(${anggota.id});return false;">tautan silsilah</a>`;
+			return `<a href="${config.server}?id=${anggota.id}" ">tautan silsilah</a>`;
+		}
+
+		dateTimeStamp(t: string): string {
+			console.log('date time stamp, input: ' + t);
+
+			if (!t) return '---';
+			if ('' == t) return '---';
+
+			t = t + '';
+
+			let date: Date = new Date(t);
+
+			if (!date) return '---';
+			if ('Invalid Date' == (date + '')) return '---';
+
+			let dateStr: string = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+
+			console.log('date time stamp, hasil: ' + dateStr);
+			return dateStr;
 		}
 	}
 }

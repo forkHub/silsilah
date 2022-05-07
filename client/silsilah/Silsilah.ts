@@ -287,7 +287,6 @@ export class Hubung extends BaseComponent {
 
 }
 
-
 var app: App = new App();
 
 window.onload = () => {

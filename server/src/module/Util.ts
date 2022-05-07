@@ -6,7 +6,7 @@ export class Util {
 	private caches: ICache[] = [];
 	private _randId: string = '';
 	private _baseDir: string = '';
-	static readonly revisi: string = '02';
+	static readonly revisi: string = '2022';
 
 	getUrl(url: string, params: any[]): string {
 		let urlHasil: string = url;
@@ -110,6 +110,8 @@ export class Util {
 	}
 
 	dateTimeStamp(t: string): string {
+		console.log('date time stamp, input: ' + t);
+
 		if (!t) return '---';
 		if ('' == t) return '---';
 
@@ -120,8 +122,9 @@ export class Util {
 		if (!date) return '---';
 		if ('Invalid Date' == (date + '')) return '---';
 
-		let dateStr: string = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
+		let dateStr: string = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
 
+		console.log('date time stamp, hasil: ' + dateStr);
 		return dateStr;
 	}
 

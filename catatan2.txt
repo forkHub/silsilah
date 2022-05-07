@@ -1,7 +1,2 @@
-handle login
-migrasi api
-
-pemisahan api
-    profile
-    kerabat
-
+bug:
+tanggal tampilan masih bulan dan tanggal, belum di lokalisasi
