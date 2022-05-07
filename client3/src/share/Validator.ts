@@ -1,5 +1,5 @@
 
-//TODO: final
+//TODO: hapus gak dipakai
 class Validator {
 	readonly VAL_ANGKA: number = 1;
 	readonly VAL_TEKS: number = 2;

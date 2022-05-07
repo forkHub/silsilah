@@ -2,45 +2,18 @@ declare var data: ISlAnggota;
 
 namespace ha.sl {
 	export class Depan {
-		// private tungguLogin: boolean = false;
 
 		constructor() {
 		}
 
 		async init(): Promise<void> {
-			await this.loadRenderAnggota(config.defaultId);
-			// api.data.halDepanDilihat = true;
-
-			// if (api.data.anggotaAktifId != '') {
-			// 	this.loadRenderAnggota(api.data.anggotaAktifId).catch((e) => {
-			// 		ha.comp.Util.error(e);
-			// 	});
-			// }
-
-			// api.data.reg(() => {
-			// 	if (this.tungguLogin) return;
-			// 	this.loadRenderAnggota(api.data.anggotaAktifId).catch((e) => {
-			// 		ha.comp.Util.error(e);
-			// 	});
-			// }, () => {
-			// 	return api.data.anggotaAktifId;
-			// });
-
-			// api.data.reg(() => {
-			// 	if (this.tungguLogin) {
-			// 		this.tungguLogin = false;
-			// 		this.loadRenderAnggota(api.data.anggotaAktifId).catch((e) => {
-			// 			ha.comp.Util.error(e);
-			// 		});
-			// 	}
-			// }, () => {
-			// 	return api.data.loginTerakhir;
-			// })
-
-			// if (config.defaultId > 0) {
-			// 	api.data.anggotaAktifId = config.defaultId + '';
-			// }
-
+			let id: string = ha.comp.Util.getQueryId();
+			if (id) {
+				await this.loadRenderAnggota(id);
+			}
+			else {
+				await this.loadRenderAnggota(config.defaultId);
+			}
 		}
 
 		async loadRenderAnggota(id: string): Promise<void> {
@@ -62,12 +35,7 @@ namespace ha.sl {
 				}
 				else if (401 == xml.status) {
 					console.log('belum login');
-					// api.data.halRedirect = api.data.HAL_DEPAN;
-					// api.data.halTarget = api.data.HAL_LOGIN;
-					// this.tungguLogin = true;
-
-					//TODO: goto login page
-					// window.top.location.href = './login.html';
+					window.top.location.href = config.server + '/login.html';
 				}
 				else {
 					console.warn('error', xml.statusText);
@@ -130,10 +98,6 @@ namespace ha.sl {
 			this.renderImage(view, anggota.foto);
 			view.attach(cont);
 
-			//todo: reaktor
-			// let hubung: Hubung = new Hubung();
-			// hubung.attach(view.hubungCont);
-			// this.renderHubung(hubung, indek);
 			this.renderHubung(indek, view.hubungCont);
 
 			view.profileUtama.onclick = (e: MouseEvent) => {
@@ -300,7 +264,6 @@ namespace ha.sl {
 			console.debug('id : ' + (e.currentTarget as HTMLButtonElement).getAttribute('id'));
 
 			let id: string = (e.currentTarget as HTMLButtonElement).getAttribute('id');
-			// api.data.anggotaAktifId = id;
 
 			window.top.location.href = (config.server + "/profile.html?id=" + id);
 		}
@@ -400,18 +363,9 @@ namespace ha.sl {
 	}
 }
 
-// var api: Silsilah;
-
 window.onload = () => {
 	var app: ha.sl.Depan = new ha.sl.Depan();
 	app.init();
-
-	// app.tungguApi().then(() => {
-	// 	app.init();
-	// 	api.data.anggotaAktifId = ha.sl.config.defaultId + '';
-	// }).catch((e) => {
-	// 	ha.comp.Util.error(e);
-	// })
 
 
 	window.document.body.onclick = () => {

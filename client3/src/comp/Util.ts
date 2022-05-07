@@ -14,6 +14,27 @@ namespace ha.comp {
 			})
 		}
 
+		static getQueryId(): string {
+			let id: string;
+
+			//get id
+			console.log('get Id:');
+			console.log(window.top.location.search);
+
+			let search: string[] = window.top.location.search.slice(1).split('&');
+			console.log('search:');
+			console.log(search);
+
+			search.forEach((item: string) => {
+				let kv: string[] = item.split('=');
+				if ('id' == kv[0]) {
+					id = kv[1]
+				}
+			})
+
+			return id;
+		}
+
 
 		static getElByNama(nama: string, parent: HTMLElement, err: boolean = true): HTMLElement {
 			let el: NodeListOf<Element>;
