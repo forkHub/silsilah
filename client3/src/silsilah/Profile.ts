@@ -149,6 +149,10 @@ namespace ha.sl {
 			return id;
 		}
 
+		halProfile(id: string): string {
+			return `${config.server}/profile.html?id=${id}`;
+		}
+
 		scanBind(): void {
 			// console.group('scan api:');
 
@@ -211,7 +215,7 @@ namespace ha.sl {
 		renderPasangan(anggota: ISlAnggota): string {
 			if (anggota.pas) {
 				return `
-				<a class="pasangan" href='#' onclick="profile.gantiId(${anggota.pas.id});">${anggota.pas.nama}</a>`;
+				<a class="pasangan" href="${this.halProfile(anggota.pas.id + '')}"> ${anggota.pas.nama} </a>`;
 			}
 			else {
 				return `<p class="text-muted font-size-sm">tidak ada data</p>`;
@@ -275,7 +279,7 @@ namespace ha.sl {
 			daftar.forEach((anggota: ISlAnggota) => {
 				let el: string = `
 				<div class='margin-bottom-8' id=${anggota.id}>
-					<a class="" href="#"onclick="profile.gantiId(${anggota.id});">${anggota.nama_lengkap} (${label})</a>
+					<a class="" href="${this.halProfile(anggota.id + '')}">${anggota.nama_lengkap} (${label})</a>
 				</div>`;
 
 				hasil += el;
@@ -295,7 +299,7 @@ namespace ha.sl {
 			anggotaAr.forEach((anggota: ISlAnggota) => {
 				let el: string = `
 				<div class='margin-bottom-8' id=${anggota.id}>
-					<a class="" href="#" onclick="profile.gantiId(${anggota.id});">${anggota.nama_lengkap}</a>
+					<a class="" href="${this.halProfile(anggota.id + '')}">${anggota.nama_lengkap}</a>
 				</div>`;
 
 				hasil += el;

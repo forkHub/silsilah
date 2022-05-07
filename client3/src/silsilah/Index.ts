@@ -122,7 +122,7 @@ namespace ha.sl {
 			view.img.onerror = () => {
 				console.log("image on error:");
 				console.log(view.img.src);
-				view.foto.style.backgroundImage = 'url(' + RouterKOns.server + '/gbr/thumb.png' + ')';
+				view.foto.style.backgroundImage = 'url(' + config.nodeServer + '/gbr/thumb.png' + ')';
 				console.log(view.foto.style.backgroundImage);
 			}
 
@@ -130,7 +130,7 @@ namespace ha.sl {
 				console.log('img on load');
 				view.foto.style.backgroundImage = 'url(' + view.img.src + ')';
 			}
-			view.img.src = fotoUrl ? fotoUrl : RouterKOns.server + '/gbr/thumb.png';
+			view.img.src = fotoUrl ? fotoUrl : config.nodeServer + '/gbr/thumb.png';
 			view.foto.style.backgroundRepeat = 'no-repeat';
 			view.foto.style.backgroundSize = 'cover';
 
@@ -180,10 +180,10 @@ namespace ha.sl {
 				}
 
 				view.imgPasangan.onerror = () => {
-					view.fotoPasangan.style.backgroundImage = 'url(' + RouterKOns.server + '/gbr/thumb.png' + ')';
+					view.fotoPasangan.style.backgroundImage = 'url(' + config.nodeServer + '/gbr/thumb.png' + ')';
 				}
 
-				view.imgPasangan.src = view.anggota.pas.foto ? view.anggota.pas.foto : (RouterKOns.server + '/gbr/thumb.png');
+				view.imgPasangan.src = view.anggota.pas.foto ? view.anggota.pas.foto : (config.nodeServer + '/gbr/thumb.png');
 
 				view.profilePasangan.setAttribute('id', view.anggota.pas.id + '');
 				view.fotoPasangan.style.backgroundRepeat = 'no-repeat';

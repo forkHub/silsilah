@@ -30,8 +30,8 @@ namespace ha.sl {
 		//pasangan
 	}
 
+	//TODO: dihapus setelah refaktoring
 	export class RouterKOns {
-		static readonly server: string = "http://localhost:3000";
 
 		static readonly gp_auth_login: string = "/sm/auth/login";
 

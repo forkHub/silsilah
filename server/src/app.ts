@@ -7,6 +7,7 @@ import { util } from "./module/Util";
 import { sm } from "./module/silsilah/SilsilahModule";
 import { Connection } from "./module/Connection";
 import { api2 } from "./module/api2/Api2";
+import { config } from "./module/silsilah/Config";
 
 const app: express.Express = express();
 const port: number = 3000;
@@ -31,13 +32,22 @@ try {
 		res.sendStatus(200);
 	});
 
+	let allowedDomains: string[] = [];
+
+	if (config.dev) {
+		allowedDomains.push('htp://localhost:80');
+		allowedDomains.push('htp://localhost');
+	}
+
 	app.use(function (_req, res, next) {
-		res.header("Access-Control-Allow-Origin", "*");
+		if (allowedDomains.indexOf(_req.headers.origin) > -1) {
+			res.header("Access-Control-Allow-Origin", `${_req.headers.origin}`);
+		}
+		else {
+			//nothing
+		}
 		res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-		// response.setHeader("Access-Control-Allow-Origin", "*");
-		// response.setHeader("Access-Control-Allow-Credentials", "true");
 		res.header("Access-Control-Allow-Methods", "OPTIONS,GET,HEAD,POST,PUT");
-		// response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 		res.status(200);
 		next();
 	});
