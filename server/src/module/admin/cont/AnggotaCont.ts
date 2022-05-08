@@ -2,10 +2,12 @@ import fs from "fs";
 import express from "express";
 import { util } from "../../Util";
 import { v } from "../../Validator";
-import { config } from "../Config";
-import { RouterKOns } from "../RouterKons";
-import { sm } from "../SilsilahModule";
-import { session } from "../SessionData";
+import { sm } from "../../silsilah/SilsilahModule";
+import { RouterKOns } from "../../silsilah/RouterKons";
+import { config } from "../../silsilah/Config";
+import { session } from "../../silsilah/SessionData";
+// import { admin } from "../admin";
+
 // import { Kons } from "../../Kons";
 
 export class AnggotaCont {
@@ -200,11 +202,11 @@ export class AnggotaCont {
 
 			//simpan gbr besar
 			buf = Buffer.from(foto.gbr_baru, 'base64');
-			await sm.cont.anggota.gambarTulisDisk(util.baseDir + sm.kons.folder_upload + foto.nama_gbr, buf);
+			await sm.admin.cont.anggota.gambarTulisDisk(util.baseDir + sm.kons.folder_upload + foto.nama_gbr, buf);
 
 			//simpan gambar kecil
 			buf = Buffer.from(foto.thumb_baru, 'base64');
-			await sm.cont.anggota.gambarTulisDisk(util.baseDir + sm.kons.folder_upload + foto.nama_thumb, buf);
+			await sm.admin.cont.anggota.gambarTulisDisk(util.baseDir + sm.kons.folder_upload + foto.nama_thumb, buf);
 
 			await sm.dao.anggota.update({
 				thumb: sm.kons.folder_download + foto.nama_thumb,

@@ -21,7 +21,7 @@ export class HalLogin {
 			<div class='container'>
 				<div class='form-login'>
 					<h2>Form login</h2>
-					<form class='form-login' action="${RouterKOns.gp_auth_login}" method="post" ${Param.HA_URL}="/">
+					<form class='form-login' action="${RouterKOns.p_auth_login}" method="post" ${Param.HA_URL}="/">
 		
 						<div class="form-group">
 							<label for="user_name">user name:</label>

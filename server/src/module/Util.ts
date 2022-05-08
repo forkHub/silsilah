@@ -75,7 +75,7 @@ export class Util {
 		if (path == RouterKOns.g_anggota_daftar_kunci_hal) {
 			hasil = this.getUrl(path, [kunci, hal])
 		}
-		else if (path == RouterKOns.g_anggota_id_calon_pas_cari_kunci_hal) {
+		else if (path == RouterKOns.halCariPasanganFilter) {
 			hasil = this.getUrl(path, [anggota.id, kunci, hal])
 		}
 		else if (path == RouterKOns.g_anggota_id_calonAnak_cari) {

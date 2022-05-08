@@ -1,6 +1,7 @@
 client api
-tautan belum bener masih mengarah ke diri sendiri
+==========
 api masih belum whitelist
 
 client server
+=============
 tombol admin dihapus dari server

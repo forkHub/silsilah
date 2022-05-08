@@ -211,7 +211,7 @@ export class EditBeranda {
 					<button
 						class="btn btn-primary col-12 col-sm-6"
 						${Param.HA_KLIK} 
-						${Param.HA_GET}="${util.getUrl(RouterKOns.g_anggota_id_calon_pas_cari, [anggota.id])}"> 
+						${Param.HA_GET}="${util.getUrl(RouterKOns.halCariPasangan, [anggota.id])}"> 
 							tambah pasangan
 					</button>`;
 		}

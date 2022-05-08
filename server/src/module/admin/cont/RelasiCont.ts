@@ -1,12 +1,14 @@
 import express from "express";
+import { RouterKOns } from "../../silsilah/RouterKons";
+import { sm } from "../../silsilah/SilsilahModule";
 import { util } from "../../Util";
-import { RouterKOns } from "../RouterKons";
+// import { RouterKOns } from "../RouterKons";
 // import { session } from "../SessionData";
-import { sm } from "../SilsilahModule";
+// import { sm } from "../SilsilahModule";
 
 export class RelasiCont {
 	//TODO: dipindah ke pasangan cont atau di rename
-	async renderCariPasangan(_req: express.Request, resp: express.Response): Promise<void> {
+	async renderTambahPasangan(_req: express.Request, resp: express.Response): Promise<void> {
 		try {
 			let id: number = parseInt(_req.params.id);
 

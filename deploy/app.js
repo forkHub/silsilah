@@ -12,6 +12,7 @@ const Util_1 = require("./module/Util");
 const SilsilahModule_1 = require("./module/silsilah/SilsilahModule");
 const Connection_1 = require("./module/Connection");
 const Api2_1 = require("./module/api2/Api2");
+const Config_1 = require("./module/silsilah/Config");
 const app = (0, express_1.default)();
 const port = 3000;
 try {
@@ -30,13 +31,20 @@ try {
         res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
         res.sendStatus(200);
     });
+    let allowedDomains = [];
+    if (Config_1.config.dev) {
+        allowedDomains.push('htp://localhost:80');
+        allowedDomains.push('htp://localhost');
+    }
     app.use(function (_req, res, next) {
-        res.header("Access-Control-Allow-Origin", "*");
+        if (allowedDomains.indexOf(_req.headers.origin) > -1) {
+            res.header("Access-Control-Allow-Origin", `${_req.headers.origin}`);
+        }
+        else {
+            //nothing
+        }
         res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-        // response.setHeader("Access-Control-Allow-Origin", "*");
-        // response.setHeader("Access-Control-Allow-Credentials", "true");
         res.header("Access-Control-Allow-Methods", "OPTIONS,GET,HEAD,POST,PUT");
-        // response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
         res.status(200);
         next();
     });

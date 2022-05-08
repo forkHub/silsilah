@@ -1,4 +1,5 @@
 // import express from "express";
+import { Admin } from "../admin/admin";
 import { Kons } from "../Kons";
 import { AuthController } from "./cont/AuthCont";
 import { Cont } from "./cont/cont";
@@ -16,6 +17,7 @@ class SM {
 	readonly kons: Kons = new Kons();
 	readonly auth: AuthController = new AuthController();
 	readonly ent: Entity = new Entity();
+	readonly admin: Admin = new Admin();
 	// readonly session: (req: express.Request) => ISessionData = session;
 
 }

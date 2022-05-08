@@ -1,6 +1,6 @@
 export class RouterKOns {
 
-	static readonly gp_auth_login: string = "/sm/auth/login";
+	static readonly p_auth_login: string = "/sm/auth/login";
 	static readonly gp_auth_logout: string = "/sm/auth/logout";
 
 	static readonly g_anggota_daftar: string = "/sm/anggota/daftar";
@@ -16,10 +16,9 @@ export class RouterKOns {
 	static readonly p_anggota_id_rel_edit_id: string = "/sm/anggota/:id/rel/edit/:id2";
 
 	//hanya get
-	//TODO: ambigu
-	static readonly g_anggota_id_calon_pas_cari: string = "/sm/anggota/:id/pasangan/tambah";
-	static readonly g_anggota_id_calon_pas_cari_kunci_hal: string = "/sm/anggota/:id/pasangan/tambah/kunci/:kunci/hal/:hal";
-
+	//TODO: diganti cari pasangan
+	static readonly halCariPasangan: string = "/sm/anggota/:id/pasangan/tambah";
+	static readonly halCariPasanganFilter: string = "/sm/anggota/:id/pasangan/tambah/kunci/:kunci/hal/:hal";
 	//post
 	static readonly p_anggota_id_pas_lihat: string = "/sm/anggota/:id/pasangan/lihat";
 
