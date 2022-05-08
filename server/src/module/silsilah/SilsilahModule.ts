@@ -1,4 +1,3 @@
-// import express from "express";
 import { Admin } from "../admin/admin";
 import { Kons } from "../Kons";
 import { AuthController } from "./cont/AuthCont";
@@ -7,7 +6,6 @@ import { Dao } from "./dao/Dao";
 import { Entity } from "./ent/Ent";
 import { Render } from "./render/Render";
 import { Router } from "./Router";
-// import { session } from "./SessionData";
 
 class SM {
 	readonly cont: Cont = new Cont();
@@ -18,7 +16,6 @@ class SM {
 	readonly auth: AuthController = new AuthController();
 	readonly ent: Entity = new Entity();
 	readonly admin: Admin = new Admin();
-	// readonly session: (req: express.Request) => ISessionData = session;
 
 }
 
