@@ -56,7 +56,7 @@ export class AuthController {
 
 	checkAuthGet(req: express.Request, resp: express.Response, next: express.NextFunction) {
 		if (!session(req).statusLogin) {
-			resp.status(401).redirect(RouterKOns.p_auth_login);
+			resp.status(401).redirect(RouterKOns.login);
 		}
 		else {
 			next();

@@ -19,16 +19,16 @@ export class EditProfileAnggota {
 
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a class='' href="${RouterKOns.g_anggota_daftar}">daftar</a></li>
+                        <li class="breadcrumb-item"><a class='' href="${RouterKOns.daftarAnggota}">daftar</a></li>
                         <li class="breadcrumb-item active" aria-current="page">edit info</li>
                     </ol>
                 </nav>
 
                 <form 
                     class="anggota"
-                    action="${util.getUrl(RouterKOns.g_anggota_id_info_edit, [anggota.id + ''])}" 
+                    action="${util.getUrl(RouterKOns.editProfile, [anggota.id + ''])}" 
                     method="post"
-                    ${Param.HA_URL}="${util.getUrl(RouterKOns.g_anggota_daftar, [anggota.id + ''])}"
+                    ${Param.HA_URL}="${util.getUrl(RouterKOns.daftarAnggota, [anggota.id + ''])}"
                     ${Param.HA_DLG}="Data telah disimpan"
                     >
 

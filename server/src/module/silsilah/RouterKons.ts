@@ -1,35 +1,39 @@
 export class RouterKOns {
 
-	static readonly p_auth_login: string = "/sm/auth/login";
-	static readonly gp_auth_logout: string = "/sm/auth/logout";
+	//auth
+	static readonly login: string = "/sm/auth/login";
+	static readonly logout: string = "/sm/auth/logout";
 
-	static readonly g_anggota_daftar: string = "/sm/anggota/daftar";
-	static readonly g_anggota_daftar_kunci_hal: string = "/sm/anggota/daftar/kunci/:kunci/hal/:hal";
+	//#admin
+	//anggota
+	static readonly daftarAnggota: string = "/sm/anggota/daftar";
+	static readonly daftarAnggotaFilter: string = "/sm/anggota/daftar/kunci/:kunci/hal/:hal";
+	static readonly pendaftaranAnggota: string = "/sm/anggota/baru";
+	static readonly hapusAnggota: string = "/sm/anggota/hapus/:id";
 
-	static readonly g_beranda_lihat_id: string = "/sm/beranda/lihat/:id";
-	static readonly g_beranda_id: string = "/sm/beranda/:id";
-	static readonly g_anggota_id_info_edit: string = "/sm/anggota/:id/info/edit";
-	static readonly g_anggota_id_edit_beranda: string = "/sm/anggota/:id/edit/beranda";
+	//web
+	static readonly lihatProfile: string = "/sm/beranda/lihat/:id";
+	static readonly berandaId: string = "/sm/beranda/:id";
+	static readonly editProfile: string = "/sm/anggota/:id/info/edit";
+	static readonly halEditAnggota: string = "/sm/anggota/:id/edit/beranda";
 
-	static readonly gp_anggota_baru: string = "/sm/anggota/baru";
-	static readonly p_anggota_hapus_id: string = "/sm/anggota/hapus/:id";
-	static readonly p_anggota_id_rel_edit_id: string = "/sm/anggota/:id/rel/edit/:id2";
 
-	//hanya get
-	//TODO: diganti cari pasangan
+	//pasangan
+	static readonly editRelasi: string = "/sm/anggota/:id/rel/edit/:id2";
 	static readonly halCariPasangan: string = "/sm/anggota/:id/pasangan/tambah";
 	static readonly halCariPasanganFilter: string = "/sm/anggota/:id/pasangan/tambah/kunci/:kunci/hal/:hal";
-	//post
-	static readonly p_anggota_id_pas_lihat: string = "/sm/anggota/:id/pasangan/lihat";
+	static readonly lihatPasangan: string = "/sm/anggota/:id/pasangan/lihat";
 
-	//post
-	static readonly p_anggota_id_anak_baca: string = "/sm/anggota/:id/anak/baca";
-	static readonly p_anggota_id_gbr_upload: string = "/sm/anggota/:id/gbr/upload";
+	//anak
+	static readonly daftarAnak: string = "/sm/anggota/:id/anak/baca";
+	static readonly daftarCalonAnak: string = "/sm/anggota/:id/anak/tambah";
+	static readonly daftarCalonAnakFilter: string = "/sm/anggota/:id/anak/tambah/kunci/:kunci/hal/:hal";
 
-	static readonly p_anggota_id_ortu_edit_id: string = "/sm/anggota/:id/ortu/edit/:id2";
+	static readonly uploadFoto: string = "/sm/anggota/:id/gbr/upload";
 
-	static readonly g_anggota_id_calonAnak: string = "/sm/anggota/:id/anak/tambah";
-	static readonly g_anggota_id_calonAnak_cari: string = "/sm/anggota/:id/anak/tambah/kunci/:kunci/hal/:hal";
+	//orang tua
+	static readonly editOrtu: string = "/sm/anggota/:id/ortu/edit/:id2";
+
 
 	static readonly rel_daftar: string = "/sm/rel/daftar";
 	static readonly rel_hapus_id: string = "/sm/rel/hapus/:id";

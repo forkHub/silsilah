@@ -17,7 +17,7 @@ export class AnggotaCont {
 			let anggotaAr: ISlAnggota[] = await sm.dao.anggota.cariAnggota('---', 0);
 			let jml: number = (await sm.dao.anggota.jmlCariAnggota('---')).jumlah;
 
-			let hal: string = sm.admin.render.daftarAnggota.render(anggotaAr, 0, jml, '---', RouterKOns.g_anggota_daftar_kunci_hal);
+			let hal: string = sm.admin.render.daftarAnggota.render(anggotaAr, 0, jml, '---', RouterKOns.daftarAnggotaFilter);
 			resp.status(200).send(hal);
 
 		}
@@ -26,7 +26,7 @@ export class AnggotaCont {
 		}
 	}
 
-	async renderEditBerandaById(_req: express.Request, resp: express.Response): Promise<void> {
+	async renderHalBerandaEdit(_req: express.Request, resp: express.Response): Promise<void> {
 		try {
 
 			let id: number = parseInt(_req.params.id);
@@ -55,7 +55,7 @@ export class AnggotaCont {
 		}
 	}
 
-	async renderEditProfileAnggota(_req: express.Request, resp: express.Response): Promise<void> {
+	async renderEditProfile(_req: express.Request, resp: express.Response): Promise<void> {
 		try {
 
 			let id: number = parseInt(_req.params.id);
@@ -80,8 +80,8 @@ export class AnggotaCont {
 		let hal: string = sm.admin.render.pilihAnggotaGenerik.render(
 			anggotaAr,
 			anggota,
-			RouterKOns.p_anggota_id_ortu_edit_id,
-			RouterKOns.g_anggota_id_calonAnak_cari,
+			RouterKOns.editOrtu,
+			RouterKOns.daftarCalonAnakFilter,
 			'pilih anak',
 			"-",
 			jml,
@@ -113,7 +113,7 @@ export class AnggotaCont {
 
 		let anggotaAr: ISlAnggota[] = await sm.dao.anggota.baca(select, where, offsetLog * config.jmlPerHal, order, [kunciSql, kunciSql, session(_req).id]);
 
-		let hal: string = sm.admin.render.pilihAnggotaGenerik.render(anggotaAr, anggota, RouterKOns.p_anggota_id_ortu_edit_id, RouterKOns.g_anggota_id_calonAnak_cari, 'pilih anak', kunci, jml, offsetLog);
+		let hal: string = sm.admin.render.pilihAnggotaGenerik.render(anggotaAr, anggota, RouterKOns.editOrtu, RouterKOns.daftarCalonAnakFilter, 'pilih anak', kunci, jml, offsetLog);
 
 		resp.status(200).send(hal);
 	}
@@ -126,7 +126,7 @@ export class AnggotaCont {
 			let offsetAbs: number = hal * config.jmlPerHal;
 			let anggotaAr: ISlAnggota[] = await sm.dao.anggota.cariAnggota(kunci, offsetAbs);
 
-			let str: string = sm.admin.render.daftarAnggota.render(anggotaAr, hal, jml, kunci, RouterKOns.g_anggota_daftar_kunci_hal);
+			let str: string = sm.admin.render.daftarAnggota.render(anggotaAr, hal, jml, kunci, RouterKOns.daftarAnggotaFilter);
 
 			resp.status(200).send(str);
 		}
@@ -135,7 +135,7 @@ export class AnggotaCont {
 		}
 	}
 
-	async renderAnggotaBaru(_req: express.Request, resp: express.Response): Promise<void> {
+	async renderPendaftaranAnggotaBaru(_req: express.Request, resp: express.Response): Promise<void> {
 		try {
 			let hal: string = sm.admin.render.anggotaBaru.render();
 			resp.status(200).send(hal);
@@ -145,7 +145,7 @@ export class AnggotaCont {
 		}
 	}
 
-	//API
+	//TODO: hapus
 	async lihatPasangan(_req: express.Request, resp: express.Response): Promise<void> {
 		try {
 
@@ -244,7 +244,7 @@ export class AnggotaCont {
 		}
 	}
 
-	async baru(_req: express.Request, resp: express.Response): Promise<void> {
+	async pendaftaranAnggota(_req: express.Request, resp: express.Response): Promise<void> {
 		try {
 			let data: ISlAnggota = {
 				nama: v.escape(_req.body.nama),
@@ -269,7 +269,7 @@ export class AnggotaCont {
 		}
 	}
 
-	async editInfo(_req: express.Request, resp: express.Response): Promise<void> {
+	async editProfile(_req: express.Request, resp: express.Response): Promise<void> {
 		try {
 
 			let data: ISlAnggota = {

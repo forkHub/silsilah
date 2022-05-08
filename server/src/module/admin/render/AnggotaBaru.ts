@@ -18,16 +18,16 @@ export class AnggotaBaru {
 
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a class='' href="${RouterKOns.g_anggota_daftar}">🏠</a></li>
+                        <li class="breadcrumb-item"><a class='' href="${RouterKOns.daftarAnggota}">🏠</a></li>
                         <li class="breadcrumb-item active" aria-current="page">baru</li>
                     </ol>
                 </nav>
 
                 <form 
                     class="anggota"
-                    action="${RouterKOns.gp_anggota_baru}" 
+                    action="${RouterKOns.pendaftaranAnggota}" 
                     method="post"
-                    ${Param.HA_URL}="${RouterKOns.g_anggota_daftar}"
+                    ${Param.HA_URL}="${RouterKOns.daftarAnggota}"
                     ${Param.HA_DLG}="Data telah disimpan"
 					${Param.HA_MANUAL}
                     >

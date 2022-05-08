@@ -105,13 +105,13 @@ export class Profile {
 	}
 
 	private renderTautan(anggota: ISlAnggota): string {
-		return `<a href="${util.getUrl(RouterKOns.g_beranda_id, [anggota.id])}">tautan silsilah</a>`;
+		return `<a href="${util.getUrl(RouterKOns.berandaId, [anggota.id])}">tautan silsilah</a>`;
 	}
 
 	private renderPasangan(anggota: ISlAnggota): string {
 		if (anggota.pas) {
 			return `
-			<a class="pasangan" href='${util.getUrl(RouterKOns.g_beranda_lihat_id, [anggota.pas.id])}'>${anggota.pas.nama}</a>`;
+			<a class="pasangan" href='${util.getUrl(RouterKOns.lihatProfile, [anggota.pas.id])}'>${anggota.pas.nama}</a>`;
 		}
 		else {
 			return `<p class="text-muted font-size-sm">tidak ada data</p>`;
@@ -174,7 +174,7 @@ export class Profile {
 		daftar.forEach((anggota: ISlAnggota) => {
 			let el: string = `
 			<div class='margin-bottom-8' id=${anggota.id}>
-				<a class="" href="${util.getUrl(RouterKOns.g_beranda_lihat_id, [anggota.id])}">${anggota.nama_lengkap} (${label})</a>
+				<a class="" href="${util.getUrl(RouterKOns.lihatProfile, [anggota.id])}">${anggota.nama_lengkap} (${label})</a>
 			</div>`;
 
 			hasil += el;
@@ -194,7 +194,7 @@ export class Profile {
 		anggotaAr.forEach((anggota: ISlAnggota) => {
 			let el: string = `
 			<div class='margin-bottom-8' id=${anggota.id}>
-				<a class="" href="${util.getUrl(RouterKOns.g_beranda_lihat_id, [anggota.id])}">${anggota.nama_lengkap}</a>
+				<a class="" href="${util.getUrl(RouterKOns.lihatProfile, [anggota.id])}">${anggota.nama_lengkap}</a>
 			</div>`;
 
 			hasil += el;

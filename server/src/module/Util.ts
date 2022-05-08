@@ -72,13 +72,13 @@ export class Util {
 		let hasil: string;
 
 		//beranda
-		if (path == RouterKOns.g_anggota_daftar_kunci_hal) {
+		if (path == RouterKOns.daftarAnggotaFilter) {
 			hasil = this.getUrl(path, [kunci, hal])
 		}
 		else if (path == RouterKOns.halCariPasanganFilter) {
 			hasil = this.getUrl(path, [anggota.id, kunci, hal])
 		}
-		else if (path == RouterKOns.g_anggota_id_calonAnak_cari) {
+		else if (path == RouterKOns.daftarCalonAnakFilter) {
 			hasil = this.getUrl(path, [anggota.id, kunci, hal]);
 		}
 		else {

@@ -37,7 +37,7 @@ export class DaftarAnggotaRenderer {
 
 				<h4>daftar anggota keluarga:</h4>
 
-				${sm.render.renderCari(true, RouterKOns.g_anggota_daftar_kunci_hal, anggotaAr[0])}
+				${sm.render.renderCari(true, RouterKOns.daftarAnggotaFilter, anggotaAr[0])}
 
 				<hr/>
 
@@ -53,7 +53,7 @@ export class DaftarAnggotaRenderer {
 					${util.hal2(offsetLog, jumlahAbs, kunci, path, config.jmlPerHal, null)}
 				</nav>
 
-				<a class="tambah" href='${RouterKOns.gp_anggota_baru}'>+</a>
+				<a class="tambah" href='${RouterKOns.pendaftaranAnggota}'>+</a>
 			</div>
 			<script type="module" src="/js${Util.revisi}/comp/Umum.js?r=${util.randId}"></script>
 		</body>
@@ -83,7 +83,7 @@ export class DaftarAnggotaRenderer {
 		anggotaAr.forEach((anggota: ISlAnggota) => {
 			let el: string = `
 			<div class='item list-group' id=${anggota.id}>
-				<a class="list-group-item list-group-item-action" href="${util.getUrl(RouterKOns.g_anggota_id_edit_beranda, [anggota.id + ''])}">
+				<a class="list-group-item list-group-item-action" href="${util.getUrl(RouterKOns.halEditAnggota, [anggota.id + ''])}">
 					<p class=''>${anggota.nama_lengkap}</p>
 				</a>
 			</div>`;

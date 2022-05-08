@@ -30,7 +30,7 @@ export class EditBeranda {
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a class='profile' href="/">🏠</a></li>
-						<li class="breadcrumb-item"><a class='profile' href="${util.getUrl(RouterKOns.g_anggota_daftar, [anggota.id])}">daftar</a></li>
+						<li class="breadcrumb-item"><a class='profile' href="${util.getUrl(RouterKOns.daftarAnggota, [anggota.id])}">daftar</a></li>
 						<li class="breadcrumb-item active" aria-current="page">edit</li>
 					</ol>
 				</nav>
@@ -83,15 +83,15 @@ export class EditBeranda {
 		
 					<div class='col-12 col-sm-6'>
 						<button class="btn btn-primary btn-block" ${Param.HA_KLIK}
-							${Param.HA_GET}="${util.getUrl(RouterKOns.g_anggota_id_info_edit, [anggota.id + ''])}">
+							${Param.HA_GET}="${util.getUrl(RouterKOns.editProfile, [anggota.id + ''])}">
 							edit
 						</button>
 					</div>
 		
 					<div class="col-12 col-sm-6">
 						<button class="btn btn-danger btn-block" ${Param.HA_KLIK}
-							${Param.HA_POST}="${util.getUrl(RouterKOns.p_anggota_hapus_id, [anggota.id + ''])}"
-							${Param.HA_URL}="${RouterKOns.g_anggota_daftar}" ${Param.HA_KF}="Apakah data akan dihapus?"
+							${Param.HA_POST}="${util.getUrl(RouterKOns.hapusAnggota, [anggota.id + ''])}"
+							${Param.HA_URL}="${RouterKOns.daftarAnggota}" ${Param.HA_KF}="Apakah data akan dihapus?"
 							${Param.HA_DLG}="data sudah berhasil dihapus?">
 							hapus
 						</button>
@@ -132,7 +132,7 @@ export class EditBeranda {
 					<button
 						class="btn btn-primary col-12 col-sm-6"
 						${Param.HA_KLIK} 
-						${Param.HA_GET}="${util.getUrl(RouterKOns.g_anggota_id_calonAnak, [anggota.id + '', '0'])}"> 
+						${Param.HA_GET}="${util.getUrl(RouterKOns.daftarCalonAnak, [anggota.id + '', '0'])}"> 
 							tambah anak
 					</button>`;
 
@@ -173,7 +173,7 @@ export class EditBeranda {
 							class="icon-trash-empty btn btn-danger" 
 							${Param.HA_KLIK} 
 							${Param.HA_KF}="data akan dihapus?" 
-							${Param.HA_POST}="${util.getUrl(RouterKOns.p_anggota_id_ortu_edit_id, [anggota.id, 0])}"
+							${Param.HA_POST}="${util.getUrl(RouterKOns.editOrtu, [anggota.id, 0])}"
 							${Param.HA_RELOAD}>
 						</button>
 					</div>
@@ -223,7 +223,7 @@ export class EditBeranda {
 				<button
 					class="btn btn-primary col-12 col-sm-6"
 					${Param.HA_KLIK} 
-					${Param.HA_POST}="${util.getUrl(RouterKOns.p_anggota_id_rel_edit_id, [anggota.pas.id, 0])}"	
+					${Param.HA_POST}="${util.getUrl(RouterKOns.editRelasi, [anggota.pas.id, 0])}"	
 					${Param.HA_RELOAD}> 
 						hapus pasangan
 				</button>`;

@@ -42,7 +42,7 @@ export class Render {
 					</div>
 
 					<form 
-						action="${util.getUrl(RouterKOns.p_anggota_id_gbr_upload, [anggota.id])}"
+						action="${util.getUrl(RouterKOns.uploadFoto, [anggota.id])}"
 						method="post"
 						class='cont upload'
 						${Param.HA_MANUAL}

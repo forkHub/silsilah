@@ -16,7 +16,7 @@ export class Silsilah {
 			</head>
 			
 			<body>
-				<button ${Param.HA_KLIK} ${Param.HA_GET}=${RouterKOns.g_anggota_daftar}>admin</button>
+				<button ${Param.HA_KLIK} ${Param.HA_GET}=${RouterKOns.daftarAnggota}>admin</button>
 				<div class='silsilah-cont'>
 
 				</div>

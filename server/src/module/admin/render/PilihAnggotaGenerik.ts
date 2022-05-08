@@ -37,8 +37,8 @@ export class PilihAnggotaGenerik {
 
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a class='' href="${util.getUrl(RouterKOns.g_anggota_daftar, [])}">daftar</a></li>
-					<li class="breadcrumb-item"><a class='' href="${util.getUrl(RouterKOns.g_anggota_id_edit_beranda, [anggotaSumber.id])}">edit</a></li>
+					<li class="breadcrumb-item"><a class='' href="${util.getUrl(RouterKOns.daftarAnggota, [])}">daftar</a></li>
+					<li class="breadcrumb-item"><a class='' href="${util.getUrl(RouterKOns.halEditAnggota, [anggotaSumber.id])}">edit</a></li>
 					<li class="breadcrumb-item active" aria-current="page">pilih</li>
 					</ol>
 				</nav>
@@ -85,7 +85,7 @@ export class PilihAnggotaGenerik {
 					href="#"
 					${Param.HA_KLIK}
 					${Param.HA_POST}=${this.getUrlPost(url, anggota, anggotaSumber)}
-					${Param.HA_URL}=${util.getUrl(RouterKOns.g_anggota_id_edit_beranda, [anggotaSumber.id + ''])}
+					${Param.HA_URL}=${util.getUrl(RouterKOns.halEditAnggota, [anggotaSumber.id + ''])}
 				> 
 					<div class=''>${anggota.nama_lengkap}</div>
 				</a>
@@ -98,10 +98,10 @@ export class PilihAnggotaGenerik {
 	}
 
 	private getUrlPost(url: string, anggotaDipilih: ISlAnggota, anggotaSumber: ISlAnggota): string {
-		if (url == RouterKOns.p_anggota_id_rel_edit_id) {
+		if (url == RouterKOns.editRelasi) {
 			return util.getUrl(url, [anggotaDipilih.id, anggotaSumber.rel_id]);
 		}
-		else if (url == RouterKOns.p_anggota_id_ortu_edit_id) {
+		else if (url == RouterKOns.editOrtu) {
 			return util.getUrl(url, [anggotaDipilih.id, anggotaSumber.rel_id]);
 		}
 		else {

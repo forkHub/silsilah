@@ -55,7 +55,7 @@ export class Pasangan {
 			let str: string = sm.admin.render.pilihAnggotaGenerik.render(
 				anggotaAr,
 				anggota,
-				RouterKOns.p_anggota_id_rel_edit_id,
+				RouterKOns.editRelasi,
 				RouterKOns.halCariPasanganFilter,
 				'pilih pasangan:',
 				kunci,
