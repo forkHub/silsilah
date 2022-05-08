@@ -1,10 +1,10 @@
 import { Param } from "../../Param";
 import { Util, util } from "../../Util";
-import { RouterKOns } from "../RouterKons";
+import { RouterKOns } from "../../silsilah/RouterKons";
 
 export class AnggotaBaru {
-	render(): string {
-		return `
+    render(): string {
+        return `
 		<!DOCTYPE html>
 		<html lang="id">
         <head>
@@ -133,5 +133,5 @@ export class AnggotaBaru {
             <script type="module" src="/js${Util.revisi}/silsilah/AnggotaBaru.js?r=${util.randId}"></script>
         </body>
 		</html>`;
-	}
+    }
 }

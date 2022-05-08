@@ -1,10 +1,10 @@
-import { Param } from "../../../Param";
-import { Util, util } from "../../../Util";
-import { config } from "../../Config";
-import { RouterKOns } from "../../RouterKons";
-import { sm } from "../../SilsilahModule";
+import { Param } from "../../Param";
+import { Util, util } from "../../Util";
+import { config } from "../../silsilah/Config";
+import { RouterKOns } from "../../silsilah/RouterKons";
+import { sm } from "../../silsilah/SilsilahModule";
 
-export class PilihAnggota {
+export class PilihAnggotaGenerik {
 	render(
 		anggotaAr: ISlAnggota[],
 		anggotaSumber: ISlAnggota,

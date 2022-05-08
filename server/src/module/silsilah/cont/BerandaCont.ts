@@ -53,7 +53,7 @@ export class BerandaCont {
 			let anggota: ISlAnggota = await sm.ent.anggota.populate(id);
 			await sm.ent.kerabat.muat(anggota);
 
-			hal = sm.render.web.profile.render(anggota);
+			hal = sm.render.profile.render(anggota);
 
 			resp.status(200).send(hal);
 		} catch (e) {

@@ -1,17 +1,21 @@
 import { Param } from "../../Param";
-import { Auth } from "./auth/Auth";
-// import { PilihAnggotaGenerik } from "./rel/PilihAnggotaGenerik";
-import { Silsilah } from "./Silsilah";
-import { RouterKOns } from "../RouterKons";
+import { AnggotaBaru } from "../../admin/render/AnggotaBaru";
+import { DaftarAnggotaRenderer } from "../../admin/render/DaftarAnggota";
+import { EditBeranda } from "../../admin/render/EditBeranda";
+import { EditProfileAnggota } from "../../admin/render/EditProfileAnggota";
+import { PilihAnggotaGenerik } from "./PilihAnggotaGenerik";
+import { Silsilah } from "../../silsilah/render/Silsilah";
 import { util } from "../../Util";
-import { Profile } from "./Profile";
-// import { Web } from "./Web";
+import { RouterKOns } from "../../silsilah/RouterKons";
 
 export class Render {
-	readonly auth: Auth = new Auth();
+	readonly daftarAnggota: DaftarAnggotaRenderer = new DaftarAnggotaRenderer();
+	readonly editBeranda: EditBeranda = new EditBeranda();
+	readonly editProfileAnggota: EditProfileAnggota = new EditProfileAnggota();
+	readonly anggotaBaru: AnggotaBaru = new AnggotaBaru();
 
+	readonly pilihAnggotaGenerik: PilihAnggotaGenerik = new PilihAnggotaGenerik();
 	readonly silsilah: Silsilah = new Silsilah();
-	readonly profile: Profile = new Profile();
 
 	public renderCari(status: boolean, path: string, anggota: ISlAnggota): string {
 		if (!status) return '';

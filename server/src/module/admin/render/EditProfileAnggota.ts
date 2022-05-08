@@ -1,6 +1,7 @@
 import { Param } from "../../Param";
+import { RouterKOns } from "../../silsilah/RouterKons";
 import { Util, util } from "../../Util";
-import { RouterKOns } from "../RouterKons";
+// import { RouterKOns } from "../RouterKons";
 
 export class EditProfileAnggota {
     render(anggota: ISlAnggota): string {

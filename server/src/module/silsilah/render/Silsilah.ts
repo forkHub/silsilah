@@ -1,6 +1,6 @@
-import { Param } from "../../../Param";
-import { util, Util } from "../../../Util";
-import { RouterKOns } from "../../RouterKons";
+import { Param } from "../../Param";
+import { util, Util } from "../../Util";
+import { RouterKOns } from "../RouterKons";
 
 export class Silsilah {
 	render(data: ISlAnggota): string {

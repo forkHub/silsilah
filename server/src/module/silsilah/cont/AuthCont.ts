@@ -54,7 +54,6 @@ export class AuthController {
 		}
 	}
 
-	//check auth middle ware
 	checkAuthGet(req: express.Request, resp: express.Response, next: express.NextFunction) {
 		if (!session(req).statusLogin) {
 			resp.status(401).redirect(RouterKOns.p_auth_login);
@@ -64,11 +63,9 @@ export class AuthController {
 		}
 	}
 
-	//TODO: masukin config buat bypass auth
 	checkAuthSession(req: express.Request, resp: express.Response, next: express.NextFunction) {
 		if (!session(req).statusLogin) {
-			// resp.status(401).send('belum login');
-			resp;
+			resp.status(401).send('belum login');
 			next();
 		}
 		else {

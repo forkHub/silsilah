@@ -1,8 +1,11 @@
 import { Param } from "../../Param";
+import { config } from "../../silsilah/Config";
+import { RouterKOns } from "../../silsilah/RouterKons";
+import { sm } from "../../silsilah/SilsilahModule";
 import { Util, util } from "../../Util";
-import { config } from "../Config";
-import { RouterKOns } from "../RouterKons";
-import { sm } from "../SilsilahModule";
+// import { config } from "../Config";
+// import { RouterKOns } from "../RouterKons";
+// import { sm } from "../SilsilahModule";
 
 export class EditBeranda {
 	render(anggota: ISlAnggota): string {

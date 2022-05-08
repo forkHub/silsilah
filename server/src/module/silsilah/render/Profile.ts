@@ -1,6 +1,6 @@
-import { Util, util } from "../../../Util";
-import { config } from "../../Config";
-import { RouterKOns } from "../../RouterKons";
+import { Util, util } from "../../Util";
+import { config } from "../Config";
+import { RouterKOns } from "../RouterKons";
 
 export class Profile {
 	render(anggota: ISlAnggota): string {

@@ -17,7 +17,7 @@ export class AnggotaCont {
 			let anggotaAr: ISlAnggota[] = await sm.dao.anggota.cariAnggota('---', 0);
 			let jml: number = (await sm.dao.anggota.jmlCariAnggota('---')).jumlah;
 
-			let hal: string = sm.render.daftarAnggota.render(anggotaAr, 0, jml, '---', RouterKOns.g_anggota_daftar_kunci_hal);
+			let hal: string = sm.admin.render.daftarAnggota.render(anggotaAr, 0, jml, '---', RouterKOns.g_anggota_daftar_kunci_hal);
 			resp.status(200).send(hal);
 
 		}
@@ -46,7 +46,7 @@ export class AnggotaCont {
 				anggota.anak = [];
 			}
 
-			hal = sm.render.editBeranda.render(anggota);
+			hal = sm.admin.render.editBeranda.render(anggota);
 
 			resp.status(200).send(hal);
 		}
@@ -63,7 +63,7 @@ export class AnggotaCont {
 			let anggota: ISlAnggota = anggotaAr[0];
 
 
-			let hal: string = sm.render.editProfileAnggota.render(anggota);
+			let hal: string = sm.admin.render.editProfileAnggota.render(anggota);
 
 			resp.status(200).send(hal);
 		}
@@ -77,7 +77,7 @@ export class AnggotaCont {
 		let jml: number = (await sm.dao.anggota.jmlCariAnggota("---")).jumlah
 		let anggota: ISlAnggota = (await sm.dao.anggota.lihat(parseInt(_req.params.id)))[0];
 
-		let hal: string = sm.render.pilihAnggota.render(
+		let hal: string = sm.admin.render.pilihAnggotaGenerik.render(
 			anggotaAr,
 			anggota,
 			RouterKOns.p_anggota_id_ortu_edit_id,
@@ -113,7 +113,7 @@ export class AnggotaCont {
 
 		let anggotaAr: ISlAnggota[] = await sm.dao.anggota.baca(select, where, offsetLog * config.jmlPerHal, order, [kunciSql, kunciSql, session(_req).id]);
 
-		let hal: string = sm.render.pilihAnggota.render(anggotaAr, anggota, RouterKOns.p_anggota_id_ortu_edit_id, RouterKOns.g_anggota_id_calonAnak_cari, 'pilih anak', kunci, jml, offsetLog);
+		let hal: string = sm.admin.render.pilihAnggotaGenerik.render(anggotaAr, anggota, RouterKOns.p_anggota_id_ortu_edit_id, RouterKOns.g_anggota_id_calonAnak_cari, 'pilih anak', kunci, jml, offsetLog);
 
 		resp.status(200).send(hal);
 	}
@@ -126,7 +126,7 @@ export class AnggotaCont {
 			let offsetAbs: number = hal * config.jmlPerHal;
 			let anggotaAr: ISlAnggota[] = await sm.dao.anggota.cariAnggota(kunci, offsetAbs);
 
-			let str: string = sm.render.daftarAnggota.render(anggotaAr, hal, jml, kunci, RouterKOns.g_anggota_daftar_kunci_hal);
+			let str: string = sm.admin.render.daftarAnggota.render(anggotaAr, hal, jml, kunci, RouterKOns.g_anggota_daftar_kunci_hal);
 
 			resp.status(200).send(str);
 		}
@@ -137,7 +137,7 @@ export class AnggotaCont {
 
 	async renderAnggotaBaru(_req: express.Request, resp: express.Response): Promise<void> {
 		try {
-			let hal: string = sm.render.anggotaBaru.render();
+			let hal: string = sm.admin.render.anggotaBaru.render();
 			resp.status(200).send(hal);
 		}
 		catch (e) {

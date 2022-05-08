@@ -2,11 +2,8 @@ import express from "express";
 import { RouterKOns } from "../../silsilah/RouterKons";
 import { sm } from "../../silsilah/SilsilahModule";
 import { util } from "../../Util";
-// import { RouterKOns } from "../RouterKons";
-// import { session } from "../SessionData";
-// import { sm } from "../SilsilahModule";
 
-export class RelasiCont {
+export class Pasangan {
 	//TODO: dipindah ke pasangan cont atau di rename
 	async renderTambahPasangan(_req: express.Request, resp: express.Response): Promise<void> {
 		try {
@@ -55,7 +52,7 @@ export class RelasiCont {
 			let anggotaAr: ISlAnggota[] = await sm.dao.pasangan.daftarCalonPasangan(kunci, offset, jkl);
 			jmlAbs = (await sm.dao.pasangan.jmlCariPasangan(kunci, offset, jkl));
 
-			let str: string = sm.render.pilihAnggota.render(
+			let str: string = sm.admin.render.pilihAnggotaGenerik.render(
 				anggotaAr,
 				anggota,
 				RouterKOns.p_anggota_id_rel_edit_id,
