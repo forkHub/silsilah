@@ -30,8 +30,6 @@ export class Router {
 		this.router.get(RouterKOns.halCariPasangan, sm.auth.checkAuthGet, sm.cont.relasi.renderCariPasangan);
 		this.router.get(RouterKOns.halCariPasanganFilter, sm.auth.checkAuthGet, sm.cont.relasi.renderCariPasangan);
 
-		this.router.post(RouterKOns.lihatPasangan, sm.auth.checkAuthSession, sm.admin.cont.anggota.lihatPasangan);	//TODO: dihapus
-
 		this.router.post(RouterKOns.uploadFoto, sm.auth.checkAuthSession, sm.admin.cont.anggota.upload);
 		this.router.post(RouterKOns.editRelasi, sm.auth.checkAuthSession, sm.admin.cont.anggota.editRel);
 		this.router.post(RouterKOns.editOrtu, sm.auth.checkAuthSession, sm.admin.cont.anggota.editOrtu);

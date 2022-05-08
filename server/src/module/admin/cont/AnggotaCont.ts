@@ -145,29 +145,6 @@ export class AnggotaCont {
 		}
 	}
 
-	//TODO: hapus
-	async lihatPasangan(_req: express.Request, resp: express.Response): Promise<void> {
-		try {
-
-			let id: number = parseInt(_req.params.id);
-			let anggotaAr: ISlAnggota[] = await sm.dao.anggota.lihat(id);
-			let anggota: ISlAnggota = anggotaAr[0];
-			let pasangan: ISlAnggota[] = [];
-
-			if (anggota.rel_id == 0) {
-				pasangan = [];
-			}
-			else {
-				pasangan = (await sm.dao.pasangan.lihatPasangan(id, anggota.rel_id));
-			}
-
-			resp.status(200).send(JSON.stringify(pasangan));
-		}
-		catch (e) {
-			util.respError(resp, e);
-		}
-	}
-
 
 	//POST
 	//====
